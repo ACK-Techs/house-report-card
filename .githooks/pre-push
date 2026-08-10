@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ "${EV_KARNESI_UPPER_ORCHESTRATOR:-}" != "1" ]; then
+  echo "Direct push is disabled for Ev Karnesi." >&2
+  echo "Use the accepted checkpoint command in docs/COMMIT_CONVENTION.md." >&2
+  exit 1
+fi
