@@ -36,6 +36,26 @@ function git(args, options = {}) {
   }
 }
 
+function tryGit(args, options = {}) {
+  try {
+    return {
+      ok: true,
+      output: execFileSync('git', args, {
+        cwd: options.cwd ?? process.cwd(),
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+        env: options.env ?? process.env
+      }).trim()
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      output: '',
+      error: error.stderr?.toString().trim() || error.message
+    };
+  }
+}
+
 function parseOptions(values) {
   const options = {};
   for (let index = 0; index < values.length; index += 1) {
@@ -136,10 +156,18 @@ function pushCheckpoint(values) {
     stdio: 'inherit'
   });
 
-  git(['fetch', remote, branch], { cwd: repoRoot });
   const remoteRef = `${remote}/${branch}`;
-  git(['merge-base', '--is-ancestor', remoteRef, 'HEAD'], { cwd: repoRoot });
-  const outgoing = git(['rev-list', '--reverse', `${remoteRef}..HEAD`], { cwd: repoRoot }).split('\n').filter(Boolean);
+  const remoteHead = tryGit(['ls-remote', '--heads', remote, `refs/heads/${branch}`], { cwd: repoRoot });
+  if (!remoteHead.ok) fail(`cannot inspect ${remote}/${branch}: ${remoteHead.error}`);
+
+  let outgoing;
+  if (remoteHead.output) {
+    git(['fetch', remote, branch], { cwd: repoRoot });
+    git(['merge-base', '--is-ancestor', remoteRef, 'HEAD'], { cwd: repoRoot });
+    outgoing = git(['rev-list', '--reverse', `${remoteRef}..HEAD`], { cwd: repoRoot }).split('\n').filter(Boolean);
+  } else {
+    outgoing = git(['rev-list', '--reverse', 'HEAD'], { cwd: repoRoot }).split('\n').filter(Boolean);
+  }
   if (!outgoing.length) fail(`no outgoing commits for ${remoteRef}`);
 
   const errors = [];
