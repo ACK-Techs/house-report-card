@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "roles": {
+    "pm-manager": {
+      "file": ".orchestrator/roles/pm-manager.md",
+      "defaultKinds": ["pm-planning", "scope", "acceptance", "comparison", "git-checkpoint"]
+    },
+    "architecture-manager": {
+      "file": ".orchestrator/roles/architecture-manager.md",
+      "defaultKinds": ["specification", "contract", "architecture-review", "migration-plan"]
+    },
+    "code-implementer": {
+      "file": ".orchestrator/roles/code-implementer.md",
+      "defaultKinds": ["implement", "geo-identity", "source-connector", "hazard-model", "scoring", "computer-vision"]
+    },
+    "independent-reviewer": {
+      "file": ".orchestrator/roles/independent-reviewer.md",
+      "defaultKinds": ["review", "architecture-review"]
+    },
+    "verifier": {
+      "file": ".orchestrator/roles/verifier.md",
+      "defaultKinds": ["verify", "test", "evaluation", "geo-verification"]
+    },
+    "geo-safety-data-reviewer": {
+      "file": ".orchestrator/roles/geo-safety-data-reviewer.md",
+      "defaultKinds": ["geo-data-review", "safety-review", "privacy-review", "source-license-review"]
+    },
+    "integration-manager": {
+      "file": ".orchestrator/roles/integration-manager.md",
+      "defaultKinds": ["integration", "release-acceptance"]
+    }
+  },
+  "phaseCapabilities": {
+    "phase-0-discovery": ["product-discovery", "source-inventory", "legal-review", "risk-taxonomy"],
+    "phase-1-foundation": ["geo-contract", "provenance", "data-quality", "observability", "security"],
+    "phase-2-property-identity": ["geocoding", "map-selection", "building-parcel-match", "entity-resolution"],
+    "phase-3-risk-intelligence": ["hazard-model", "geology", "earthquake", "flood", "landslide", "elevation", "uncertainty"],
+    "phase-4-liveability": ["routing", "public-transit", "solar", "climate", "air-quality", "poi"],
+    "phase-5-scoring-report": ["scoring", "confidence", "explanation", "comparison", "report-versioning"],
+    "phase-6-experience": ["web", "mobile", "accessibility", "accounts", "privacy"],
+    "phase-7-scale-trust": ["source-onboarding", "evaluation", "calibration", "security", "enterprise-api"]
+  }
+}

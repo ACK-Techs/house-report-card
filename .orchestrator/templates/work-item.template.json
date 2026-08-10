@@ -1,0 +1,47 @@
+{
+  "id": "replace-item-id",
+  "title": "Replace item title",
+  "kind": "implement",
+  "domains": ["replace-domain"],
+  "objective": "Define the concrete product outcome.",
+  "responsibility": "Define allowed decisions and explicit stop boundaries.",
+  "inputs": [
+    {
+      "type": "path",
+      "value": "README.md",
+      "description": "Binding product definition"
+    }
+  ],
+  "outputs": ["Concrete code, contract, test, report, or decision artifact"],
+  "acceptanceCriteria": ["A directly verifiable completion criterion"],
+  "capabilities": ["replace-capability"],
+  "relations": {
+    "dependsOn": [],
+    "reviews": [],
+    "verifies": [],
+    "revises": [],
+    "integrates": []
+  },
+  "risk": {
+    "level": "medium",
+    "reasons": [],
+    "approvalBoundaries": []
+  },
+  "execution": {
+    "mode": "delegate",
+    "isolation": "platform-default",
+    "readOnly": false,
+    "independent": false,
+    "writeScopes": ["replace/write/scope"],
+    "preferredPlatforms": ["codex", "cursor", "claude-code"],
+    "owner": null
+  },
+  "status": "draft",
+  "attempt": 0,
+  "resultRef": null,
+  "extensions": {
+    "role": "code-implementer",
+    "phase": "phase-0-discovery",
+    "commitScope": "discovery"
+  }
+}

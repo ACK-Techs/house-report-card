@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0.0",
+  "systemName": "ev-karnesi-orchestrator",
+  "paths": {
+    "entrypoints": [
+      "AGENTS.md",
+      ".agents/skills/orchestrate-ev-karnesi/SKILL.md"
+    ],
+    "skillRoots": [
+      ".agents/skills",
+      ".agent/skills",
+      ".cursor/skills",
+      ".claude/skills",
+      ".codex/skills"
+    ],
+    "sourceRoots": [
+      "apps",
+      "packages",
+      "services",
+      "infra",
+      "tests",
+      "docs",
+      "README.md"
+    ],
+    "requiredContext": [
+      "AGENTS.md",
+      "README.md",
+      ".orchestrator/PROJECT-STATE.md",
+      ".orchestrator/ARCHITECTURE.md",
+      ".orchestrator/SYSTEM.md",
+      "docs/COMMIT_CONVENTION.md",
+      ".orchestrator/roles/pm-manager.md"
+    ],
+    "runs": ".orchestrator/runs",
+    "catalog": ".orchestrator/catalog/repo-context.json",
+    "adapters": ".orchestrator/adapters"
+  },
+  "lifecycle": {
+    "statuses": ["draft", "ready", "active", "blocked", "done", "failed", "cancelled"],
+    "terminalStatuses": ["done", "failed", "cancelled"],
+    "transitions": {
+      "draft": ["ready", "cancelled"],
+      "ready": ["active", "blocked", "cancelled"],
+      "active": ["done", "blocked", "failed", "cancelled"],
+      "blocked": ["ready", "cancelled"],
+      "done": [],
+      "failed": [],
+      "cancelled": []
+    }
+  },
+  "riskPolicy": {
+    "levels": ["low", "medium", "high", "critical"],
+    "independentGateKinds": [
+      "implement",
+      "contract",
+      "geo-identity",
+      "source-connector",
+      "hazard-model",
+      "scoring",
+      "confidence-model",
+      "computer-vision",
+      "personal-data",
+      "security",
+      "data-storage",
+      "migration",
+      "deployment",
+      "public-risk-language"
+    ],
+    "requireIndependentReviewAt": ["high", "critical"],
+    "requireVerificationAt": ["high", "critical"],
+    "requireHumanDecisionFor": [
+      "production-write",
+      "destructive-operation",
+      "secret-access",
+      "paid-provider-enable",
+      "external-message",
+      "source-license-acceptance",
+      "public-risk-methodology-release"
+    ],
+    "forceQualityGateKinds": [
+      "contract",
+      "geo-identity",
+      "source-connector",
+      "hazard-model",
+      "scoring",
+      "confidence-model",
+      "computer-vision",
+      "personal-data",
+      "security",
+      "data-storage",
+      "migration"
+    ]
+  },
+  "authorityPolicy": {
+    "managerHasDelegatedProjectAuthority": true,
+    "managerMayApproveProductBoundaries": true,
+    "managerMayApproveHumanBoundaries": false,
+    "platformApprovalsRemainExternal": true
+  },
+  "parallelPolicy": {
+    "defaultMaxWriters": 3,
+    "serializeUnknownWriteScope": true,
+    "readOnlyItemsMayShareBatch": true,
+    "preferWorktreeForParallelWriters": true,
+    "serializeGitPush": true
+  },
+  "historyPolicy": {
+    "format": "jsonl",
+    "appendOnly": true,
+    "storeRawPrompts": false,
+    "redactKeyFragments": [
+      "authorization",
+      "cookie",
+      "password",
+      "secret",
+      "token",
+      "apiKey",
+      "privateKey",
+      "personalData",
+      "fullAddress",
+      "photo"
+    ],
+    "commitGeneratedRunsByDefault": false
+  },
+  "repoGuardrails": {
+    "protectedPrefixes": [".git"],
+    "doNotTouch": [],
+    "controlledWritePaths": [
+      ".orchestrator/config.json",
+      ".orchestrator/contracts",
+      "docs/COMMIT_CONVENTION.md"
+    ],
+    "commitRequiresExplicitRequest": false,
+    "projectLevelCommitAuthorization": true,
+    "commitAfterValidatedWriteItem": true,
+    "commitMessageConvention": "conventional-commits",
+    "commitMessageFormat": "type(scope): summary",
+    "commitWorkItemIdInBodyOrFooter": true,
+    "atomicCommitsRequired": true,
+    "pushRequiresExplicitRequest": false,
+    "projectLevelPushAuthorization": true,
+    "pushAcceptedIntegrationOnly": true,
+    "pushByUpperManagerOnly": true,
+    "defaultRemote": "origin",
+    "defaultTargetBranch": "main",
+    "syncRemoteBeforePush": true,
+    "forcePushAllowed": false
+  }
+}

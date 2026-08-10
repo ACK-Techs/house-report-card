@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-10T15:36:23.817Z",
+  "repository": {
+    "root": ".",
+    "name": "ev-karnesi",
+    "commit": null,
+    "roots": {
+      "apps": {
+        "exists": false
+      },
+      "packages": {
+        "exists": false
+      },
+      "services": {
+        "exists": false
+      },
+      "infra": {
+        "exists": false
+      },
+      "tests": {
+        "exists": false
+      },
+      "docs": {
+        "exists": true,
+        "mtimeMs": 1786376115912.601
+      },
+      "README.md": {
+        "exists": true,
+        "mtimeMs": 1786375624308.123
+      }
+    }
+  },
+  "skills": [
+    {
+      "name": "orchestrate-ev-karnesi",
+      "description": "Manage Ev Karnesi product discovery, architecture, implementation, data-source integration, geospatial identity, hazard and liveability analysis, scoring, review, verification, integration, resume work, and phase-based Git delivery through the repository's persistent .orchestrator run graph. Use for non-trivial or multi-step Ev Karnesi work, cross-layer changes, multiple agents, API/data contracts, map/location logic, risk claims, personal data, migrations, deployments, or any task requiring durable handoffs and quality gates.",
+      "path": ".agents/skills/orchestrate-ev-karnesi/SKILL.md",
+      "fingerprint": "90118113f8db9e6d092f72cd6d1d26bea40c2ce4079e7f7c4907d6acd6818c4b"
+    }
+  ],
+  "capabilities": [
+    "orchestrate-ev-karnesi"
+  ],
+  "maps": {
+    "semantic": [],
+    "dependency": null
+  },
+  "mapHealth": {
+    "stale": false,
+    "note": "Source roots catalog snapshot ile doğrudan izlenir."
+  },
+  "adapters": [
+    {
+      "id": "claude-code",
+      "path": ".orchestrator/adapters/claude-code.json",
+      "capabilities": {
+        "subagents": "custom project agents under .claude/agents with foreground/background execution",
+        "agentTeams": "experimental shared task list and peer messaging, disabled by default",
+        "worktrees": "session and subagent worktree isolation",
+        "approvals": "permission modes and allow/deny rules; background requests surface to the lead in supported versions",
+        "resume": "sessions and some subagents can resume; experimental teams have resumption limitations"
+      }
+    },
+    {
+      "id": "codex",
+      "path": ".orchestrator/adapters/codex.json",
+      "capabilities": {
+        "subagents": "available in current local releases when requested or required by AGENTS.md/skills",
+        "customAgents": ".codex/agents/*.toml",
+        "worktrees": "native in the ChatGPT desktop app; availability differs by surface",
+        "approvals": "sandbox and approval policy are inherited by subagents",
+        "resume": "agent threads and app tasks are inspectable; persisted run files remain the portable source of truth"
+      }
+    },
+    {
+      "id": "cursor",
+      "path": ".orchestrator/adapters/cursor.json",
+      "capabilities": {
+        "subagents": "foreground/background Task delegation with isolated context",
+        "customAgents": ".cursor/agents/*.md, with compatibility loading for Claude and Codex agent locations",
+        "worktrees": "managed isolated checkouts for parallel/background work",
+        "approvals": "run modes and command/tool approval policies are surface configuration",
+        "resume": "subagent IDs and agent sessions can be resumed when supported"
+      }
+    }
+  ],
+  "snapshot": "990d7422bc64fe8d716c594350e1619c46d1d2f890e98adc0cb2b0ffd4804d18"
+}

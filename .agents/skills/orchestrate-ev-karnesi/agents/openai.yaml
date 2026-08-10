@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ev Karnesi Orchestrator"
+  short_description: "Ev Karnesi geliştirme run graphını yönet"
+  default_prompt: "Use $orchestrate-ev-karnesi to manage this Ev Karnesi task with the persistent run graph, independent quality gates, and shared Git delivery protocol."

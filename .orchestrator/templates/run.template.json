@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "replace-run-id",
+  "title": "Replace title",
+  "goal": "Replace goal",
+  "createdAt": "2026-08-10T00:00:00.000Z",
+  "updatedAt": "2026-08-10T00:00:00.000Z",
+  "revision": 0,
+  "context": {
+    "requiredPaths": [
+      "AGENTS.md",
+      "README.md",
+      ".orchestrator/PROJECT-STATE.md",
+      ".orchestrator/ARCHITECTURE.md",
+      ".orchestrator/SYSTEM.md",
+      "docs/COMMIT_CONVENTION.md"
+    ],
+    "optionalPaths": [],
+    "catalogSnapshot": null,
+    "assumptions": [],
+    "extensions": {
+      "targetPhase": null,
+      "architectureDecisions": [],
+      "dataSources": [],
+      "evaluationSets": [],
+      "gitCheckpoint": null
+    }
+  },
+  "constraints": [
+    "Veri yokluğu düşük risk olarak yorumlanmaz.",
+    "Bölgesel tehlike gerçek bina dayanımı gibi sunulmaz.",
+    "Her türetilmiş sonuç kaynak, tarih, çözünürlük, yöntem sürümü ve güven taşır.",
+    "Writer atomik commit oluşturur ancak push yapmaz; accepted checkpoint'i üst orchestrator push eder."
+  ],
+  "policy": {
+    "requiresIntegration": true,
+    "extensions": {
+      "requiresContractFirst": true,
+      "requiresDocumentationSync": true,
+      "requiresEvaluationEvidence": true,
+      "requiresAcceptedGitCheckpoint": true
+    }
+  },
+  "decisions": [],
+  "items": [],
+  "extensions": {
+    "pmOwner": "pm-manager",
+    "architectureOwner": "architecture-manager",
+    "defaultRemote": "origin",
+    "defaultBranch": "main"
+  }
+}
