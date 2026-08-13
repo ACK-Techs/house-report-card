@@ -30,7 +30,7 @@
     "Veri yokluğu düşük risk olarak yorumlanmaz.",
     "Bölgesel tehlike gerçek bina dayanımı gibi sunulmaz.",
     "Her türetilmiş sonuç kaynak, tarih, çözünürlük, yöntem sürümü ve güven taşır.",
-    "Writer atomik commit oluşturur ancak push yapmaz; accepted checkpoint'i üst orchestrator push eder."
+    "Writer atomik commit oluşturur; kullanıcı istediyse git push kullanılır, force-push yapılmaz."
   ],
   "policy": {
     "requiresIntegration": true,

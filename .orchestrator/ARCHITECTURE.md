@@ -107,16 +107,7 @@ Writer'lar aynı contract, migration, skor metodolojisi, ortak config veya Git c
 
 ## Git checkpoint mimarisi
 
-Writer commit'leri work item sınırında atomiktir. Remote push tek tek writer'lar tarafından yapılmaz. Üst orchestrator:
-
-1. İlgili fazın implementasyon sonuçlarını toplar.
-2. Review, verification ve integration gate'lerini kabul eder.
-3. Commit mesajlarını `docs/COMMIT_CONVENTION.md` ile doğrular.
-4. Remote branch'i güvenli biçimde senkronlar.
-5. Kabul edilen commit dizisini tek bir faz/checkpoint push'u olarak gönderir.
-6. Remote, branch ve commit SHA kanıtını run sonucuna kaydeder.
-
-Bu model farklı bilgisayarlardaki agentların aynı dili kullanmasını ve push yarışlarının merkezi biçimde yönetilmesini sağlar.
+Writer commit'leri work item sınırında atomiktir. Remote teslim `git push` ile yapılır; commit dili hook ve CI tarafından doğrulanır. İsteğe bağlı git-checkpoint helper büyük faz teslimlerini toplu doğrulayabilir. Force-push yapılmaz.
 
 ## Genişletme kuralı
 

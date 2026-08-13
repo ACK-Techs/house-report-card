@@ -146,22 +146,20 @@ Writer:
    ```
 
 6. Atomik commit oluşturur ve SHA'yı result'a kaydeder.
-7. Push yapmadan üst orchestrator'a teslim eder.
+7. Kullanıcı açıkça push istemedikçe remote'a göndermez; istendiğinde `git push` kullanır.
 
-## 8. Faz/checkpoint push protokolü
+## 8. Push protokolü
 
-Üst orchestrator ancak aşağıdakiler tamamlandığında push yapar:
+`git push` serbesttir. Checkpoint helper zorunlu değildir.
 
-- İlgili implement work item'ları `pass/done`
-- Zorunlu independent review item'ları `pass/done`
-- Zorunlu verification item'ları `pass/done`
-- Integration ve PM acceptance tamamlanmış
-- Checkpoint item'ının dependency'leri `done`
-- Outgoing commit'ler bu belgeye uygun
-- Remote hedefi ve branch doğrulanmış
-- Push fast-forward; remote commit ezilmiyor
+Push öncesi:
 
-Bağlayıcı komut:
+- Outgoing commit'ler bu belgeye uygun olmalıdır (`commit-msg` ve `pre-push` bunu doğrular)
+- Remote hedefi ve branch bilinmelidir
+- Push fast-forward olmalıdır; remote commit ezilmez
+- Force-push yasaktır
+
+İsteğe bağlı toplu teslim komutu:
 
 ```bash
 node .orchestrator/bin/git-checkpoint.mjs push \
@@ -171,8 +169,6 @@ node .orchestrator/bin/git-checkpoint.mjs push \
   --remote origin \
   --branch main
 ```
-
-Komut; orchestrator sistemini doğrular, checkpoint dependency'lerini kontrol eder, remote'u fetch eder, outgoing commit dilini doğrular, yalnız fast-forward push yapar ve başarılı remote/branch/SHA bilgisini çıktı olarak verir.
 
 ## 9. Çakışma ve başarısız push
 
@@ -193,6 +189,6 @@ git config core.hooksPath .githooks
 Bu ayar:
 
 - `commit-msg` hook'u ile commit dilini yerelde doğrular.
-- `pre-push` hook'u ile üst orchestrator checkpoint komutu dışındaki doğrudan push'ları engeller.
+- `pre-push` hook'u ile gönderilen commit dilini doğrular; `git push`'u engellemez.
 
 GitHub Actions aynı commit standardını push ve pull request'lerde tekrar doğrular. Branch protection etkinleştirildiğinde bu kontrol required status check yapılmalıdır.

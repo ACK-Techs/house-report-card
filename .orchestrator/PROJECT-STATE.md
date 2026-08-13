@@ -12,7 +12,7 @@ Ev Karnesi fikir tanımı ve ürün keşfi aşamasındadır. Uygulama stack'i, i
 - Uygulama mühendislik ekspertizi veya güvenli bina sertifikası değildir.
 - Sonuçlar kaynaklı, açıklanabilir ve belirsizliği görünür olmalıdır.
 - Geliştirme, kalıcı run graph ve bağımsız kalite kapılarıyla yönetilir.
-- Git teslimleri ortak commit diliyle, kabul edilmiş faz/checkpoint bazında üst orchestrator tarafından push edilir.
+- Git teslimleri ortak commit diliyle yapılır; `git push` serbesttir ve commit-msg/CI aynı dili doğrular.
 
 ## Henüz karar verilmemiş alanlar
 

@@ -2,7 +2,7 @@
 
 ## Görev
 
-Kullanıcı hedefini tam kapsamlı, bağımlılıkları doğru, riskleri kapılanmış ve kabulü kanıtlanabilir bir run graph'a dönüştürmek; run tamamlanana ve Git checkpoint teslim edilene kadar merkezi sahipliği korumak.
+Kullanıcı hedefini tam kapsamlı, bağımlılıkları doğru, riskleri kapılanmış ve kabulü kanıtlanabilir bir run graph'a dönüştürmek; run tamamlanana kadar merkezi sahipliği korumak.
 
 ## Zorunlu okuma
 
@@ -18,7 +18,7 @@ Kullanıcı hedefini tam kapsamlı, bağımlılıkları doğru, riskleri kapıla
 - Başarısız geçmişi koru; revision item oluştur.
 - Kod, contract, test, metodoloji ve kullanıcı açıklaması eşleşmeden integration kabul etme.
 - Her write item'ın faz/scope bilgisini belirle ve ortak commit dilini zorunlu tut.
-- Accepted checkpoint için remote/branch durumunu kontrol edip push'u serialize et.
+- Kullanıcı push istediğinde remote/branch durumunu kontrol edip `git push` kullan.
 
 ## Yapma
 
@@ -27,9 +27,9 @@ Kullanıcı hedefini tam kapsamlı, bağımlılıkları doğru, riskleri kapıla
 - Veri yokluğunu olumlu sonuç gibi kabul etme.
 - Uzmanlık gerektiren afet/yapı iddiasını sessiz varsayımla çözme.
 - Başarısız item'ı geriye dönük `done` yapma.
-- Review/verify/integration tamamlanmadan push yapma.
+- High/critical işi review/verify/integration olmadan bitmiş sayma.
 - Force-push yapma veya başka agent/kullanıcı değişikliklerini commit'e katma.
 
 ## Teslim
 
-Güncel run durumu, kabul edilen artifact'ler, açık risk/blocker'lar, sıradaki güvenli batch, commit SHA'ları ve checkpoint push kanıtı.
+Güncel run durumu, kabul edilen artifact'ler, açık risk/blocker'lar, sıradaki güvenli batch, commit SHA'ları ve varsa push kanıtı.

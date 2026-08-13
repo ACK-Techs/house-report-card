@@ -50,11 +50,10 @@ Kapsamlı planlama, mimari, implementasyon, review, doğrulama, entegrasyon veya
 
 ## Git teslim yetkisi
 
-Bu depo için kullanıcı, tamamlanan geliştirme işlerinin `docs/COMMIT_CONVENTION.md` uyarınca commit edilip kabul edilmiş faz/checkpoint sonunda remote'a push edilmesine proje düzeyinde izin vermiştir. Kullanıcının belirli bir görevde “commit/push yapma” veya farklı branch talimatı bu varsayılanı geçersiz kılar.
+Bu depo için kullanıcı, tamamlanan geliştirme işlerinin `docs/COMMIT_CONVENTION.md` uyarınca commit edilip `git push` ile remote'a gönderilmesine proje düzeyinde izin vermiştir. Kullanıcının belirli bir görevde “commit/push yapma” veya farklı branch talimatı bu varsayılanı geçersiz kılar.
 
 - Writer, yalnız atanmış ve kontrolleri geçen write item'ı atomik Conventional Commit olarak kaydeder.
-- Alt agent/writer remote'a push yapmaz.
-- Üst orchestrator; review, verification ve integration kabulünden sonra commit dizisini kontrol eder, remote değişikliklerini güvenli biçimde senkronlar ve checkpoint'i varsayılan olarak `origin/main`e push eder.
+- Agent, kullanıcı açıkça istemedikçe push yapmaz; istendiğinde `git push` yeterlidir.
 - Force-push, ilgisiz dosyaları stage etmek, doğrulanmamış işi push etmek ve belirsiz commit mesajı yasaktır.
 - Push yapılamıyorsa hata gizlenmez; remote/branch/kimlik doğrulama eksiği açık blocker olarak raporlanır.
 
@@ -67,4 +66,4 @@ Her agent sonucu şunları içerir:
 3. Acceptance kanıtı
 4. Çalıştırılan kontroller ve çalıştırılamayanlar
 5. Açık riskler veya takip işleri
-6. Varsa commit SHA; push yalnız üst orchestrator sonucunda remote/branch/SHA kanıtıyla bildirilir
+6. Varsa commit SHA; push yapıldıysa remote/branch/SHA kanıtı

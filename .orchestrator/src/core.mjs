@@ -248,7 +248,7 @@ export async function createRun({ id, title, goal, outputDirectory, repoRoot = R
       'Kapsam süre uğruna daraltılmaz; sıra bağımlılık, risk ve acceptance kriterlerine göre belirlenir.',
       'Veri yokluğu düşük risk; bölgesel tehlike ise gerçek bina dayanımı olarak yorumlanmaz.',
       'Her önemli türetilmiş sonuç kaynak, tarih, coğrafi çözünürlük, yöntem sürümü ve güven seviyesi taşır.',
-      'Her doğrulanmış write item docs/COMMIT_CONVENTION.md uyarınca atomik commit edilir; writer push yapmaz, accepted checkpoint\'i üst orchestrator push eder.'
+      'Her doğrulanmış write item docs/COMMIT_CONVENTION.md uyarınca atomik commit edilir; kullanıcı istediyse git push kullanılır, force-push yapılmaz.'
     ],
     policy: { requiresIntegration: false }, decisions: [], items: []
   };

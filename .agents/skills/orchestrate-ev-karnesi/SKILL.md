@@ -79,8 +79,7 @@ node .orchestrator/bin/orchestrator.mjs render <run.json> <item-id> --platform c
 
 - Follow `docs/COMMIT_CONVENTION.md` exactly.
 - Let a writer commit only its validated assigned scope with `Work-Item` and `Phase` footers.
-- Never let a writer or child agent push.
-- Let the upper orchestrator push only after independent review, verification, integration and PM acceptance of the checkpoint.
+- Do not push unless the user asked; when they did, use `git push`.
 - Fetch before push; stop and report non-fast-forward or ownership conflicts rather than overwriting remote work.
 - Never force-push.
 - Record commit SHA and, after push, remote/branch/SHA evidence.

@@ -1,8 +1,14 @@
 #!/usr/bin/env sh
 set -eu
 
-if [ "${EV_KARNESI_UPPER_ORCHESTRATOR:-}" != "1" ]; then
-  echo "Direct push is disabled for Ev Karnesi." >&2
-  echo "Use the accepted checkpoint command in docs/COMMIT_CONVENTION.md." >&2
-  exit 1
-fi
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+zero="0000000000000000000000000000000000000000"
+
+while read -r _local_ref local_sha _remote_ref remote_sha; do
+  if [ -z "${local_sha:-}" ] || [ "$local_sha" = "$zero" ]; then
+    continue
+  fi
+  node .orchestrator/bin/git-checkpoint.mjs validate-range "$remote_sha" "$local_sha"
+done

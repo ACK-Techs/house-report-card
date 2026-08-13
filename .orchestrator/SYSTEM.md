@@ -55,7 +55,7 @@ Kullanıcı hedefi
   -> bağımsız review + verification
   -> gerekirse revision
   -> integration + PM acceptance
-  -> faz/checkpoint commit kontrolü ve push
+  -> commit ve git push
 ```
 
 ## Run graph ilkeleri
@@ -135,12 +135,12 @@ Artifact path'leri repo-relative olmalı; secret, token, tam kişisel adres, ham
 4. Yeni run oluştur veya mevcut run'ı resume et.
 5. Contract-first graph kur.
 6. Riskli item'lara bağımsız gate ekle.
-7. Commit scope/fazını ve checkpoint push item'ını graph'a ekle.
+7. Commit scope/fazını graph'a ekle; büyük teslimlerde isteğe bağlı checkpoint item kullanılabilir.
 8. `validate`, `sync`, `status` çalıştır.
 9. İlk güvenli batch'i dispatch et.
 10. Sonuçları `record` ile kabul et; eksikte revision oluştur.
 11. Integration ve PM acceptance olmadan işi bitmiş sayma.
-12. `docs/COMMIT_CONVENTION.md` ile commitleri doğrula ve kabul edilmiş checkpoint'i üst orchestrator olarak push et.
+12. `docs/COMMIT_CONVENTION.md` ile commitleri doğrula ve kullanıcı istediğinde `git push` yap.
 
 ## Resume protokolü
 
@@ -168,12 +168,12 @@ node .orchestrator/bin/orchestrator.mjs verify-system
 
 ## Git teslim protokolü
 
-- Proje düzeyi varsayılan yetki, kabul edilmiş geliştirme checkpoint'lerinin commit ve push edilmesidir.
-- Writer yalnız work item kapsamını, kontrollerden sonra atomik commit eder; push yapmaz.
-- Üst orchestrator review, verify, integration ve commit standardını kabul ettikten sonra push eder.
+- Proje düzeyi varsayılan yetki, tamamlanan işin Conventional Commit ile kaydedilip `git push` edilmesidir.
+- Writer yalnız work item kapsamını, kontrollerden sonra atomik commit eder.
+- Agent, kullanıcı açıkça istemedikçe push yapmaz.
 - Remote değişiklikleri önce fetch edilir; non-fast-forward durumunda değişiklikler incelenmeden otomatik ezilmez.
 - Force-push hiçbir durumda yapılmaz.
-- Push kanıtı remote, branch ve SHA ile result/run artifact'ine eklenir.
+- Push kanıtı remote, branch ve SHA ile bildirilir.
 - Kullanıcının görev özelindeki “push yapma” talimatı her zaman üstündür.
 
 Ayrıntılı ve bağlayıcı dil: `docs/COMMIT_CONVENTION.md`.
@@ -185,7 +185,6 @@ Ayrıntılı ve bağlayıcı dil: `docs/COMMIT_CONVENTION.md`.
 - Implementer self-review'unu bağımsız gate saymak.
 - Failed geçmişi yeniden yazmak.
 - Scope dışı veya kullanıcıya ait değişiklikleri commit etmek.
-- Writer/alt agent'ın doğrudan push yapması.
-- Review/verify/integration tamamlanmadan checkpoint push etmek.
+- Kullanıcı istemeden agent'ın push yapması.
 - `wip`, `updates`, `changes` gibi belirsiz commit mesajları kullanmak.
 - Force-push yapmak veya kullanıcı/platform approval'ı uydurmak.
