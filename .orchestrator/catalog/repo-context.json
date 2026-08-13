@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-10T15:36:23.817Z",
+  "generatedAt": "2026-08-13T09:35:24.980Z",
   "repository": {
     "root": ".",
-    "name": "ev-karnesi",
-    "commit": null,
+    "name": "house-report-card",
+    "commit": "6b634db1aea845ab54f4b0ac1d395632de6df147",
     "roots": {
       "apps": {
         "exists": false
@@ -85,5 +85,5 @@
       }
     }
   ],
-  "snapshot": "990d7422bc64fe8d716c594350e1619c46d1d2f890e98adc0cb2b0ffd4804d18"
+  "snapshot": "a7bffc2ca44a8dfc025180e06e37ffabbbe79374e7150ea4bdbf2ead563391c2"
 }
