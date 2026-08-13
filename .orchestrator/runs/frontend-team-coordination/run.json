@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-team-coordination",
+  "title": "Frontend team coordination",
+  "goal": "Create a shared GitHub label taxonomy and phased frontend planning issues from the accepted design discovery documents.",
+  "createdAt": "2026-08-13T10:17:24.815Z",
+  "updatedAt": "2026-08-13T10:19:24.444Z",
+  "revision": 4,
+  "context": {
+    "requiredPaths": [
+      "AGENTS.md",
+      "README.md",
+      ".orchestrator/PROJECT-STATE.md",
+      ".orchestrator/ARCHITECTURE.md",
+      ".orchestrator/SYSTEM.md",
+      "docs/COMMIT_CONVENTION.md",
+      ".orchestrator/roles/pm-manager.md"
+    ],
+    "optionalPaths": [],
+    "catalogSnapshot": "a7bffc2ca44a8dfc025180e06e37ffabbbe79374e7150ea4bdbf2ead563391c2",
+    "assumptions": []
+  },
+  "constraints": [
+    "Kapsam süre uğruna daraltılmaz; sıra bağımlılık, risk ve acceptance kriterlerine göre belirlenir.",
+    "Veri yokluğu düşük risk; bölgesel tehlike ise gerçek bina dayanımı olarak yorumlanmaz.",
+    "Her önemli türetilmiş sonuç kaynak, tarih, coğrafi çözünürlük, yöntem sürümü ve güven seviyesi taşır.",
+    "Her doğrulanmış write item docs/COMMIT_CONVENTION.md uyarınca atomik commit edilir; writer push yapmaz, accepted checkpoint'i üst orchestrator push eder."
+  ],
+  "policy": {
+    "requiresIntegration": false
+  },
+  "decisions": [
+    {
+      "id": "frontend-github-setup-approval-001",
+      "summary": "Create the frontend planning label taxonomy and unassigned GitHub issues",
+      "reason": "The user explicitly asked to define new labels and create frontend developer issues from the agreed planning sequence.",
+      "extensions": {
+        "type": "approval",
+        "itemId": "frontend-github-setup-001",
+        "boundary": "Creating GitHub labels and unassigned issues is explicitly requested by the user.",
+        "outcome": "approved",
+        "provenance": "user-confirmed"
+      },
+      "decidedAt": "2026-08-13T10:17:58.774Z",
+      "actor": "pm-manager"
+    }
+  ],
+  "items": [
+    {
+      "id": "frontend-github-setup-001",
+      "title": "Create frontend planning labels and issues",
+      "kind": "coordination",
+      "domains": [
+        "web",
+        "product-discovery",
+        "orchestrator"
+      ],
+      "objective": "Create a minimal shared label taxonomy and ordered GitHub issues for frontend planning, design direction, work allocation, and peer review.",
+      "responsibility": "Create only the agreed labels and unassigned planning issues; do not assign people, start implementation, or make product decisions outside existing documentation.",
+      "inputs": [
+        {
+          "type": "path",
+          "value": "docs/frontend-experience-overview.md",
+          "description": "Accepted information architecture"
+        },
+        {
+          "type": "path",
+          "value": "docs/frontend-pages",
+          "description": "Accepted frontend page briefs"
+        }
+      ],
+      "outputs": [
+        "GitHub labels and issue URLs"
+      ],
+      "acceptanceCriteria": [
+        "The label set distinguishes frontend scope, planning/discovery/design/coordination work, experience phase, and priority without duplicating existing labels.",
+        "Issues express the agreed dependency order: plan review, page architecture, visual language, work allocation, then page design and peer revision.",
+        "Issues are unassigned, linked to the available design documentation, and do not claim unapproved implementation or data behavior."
+      ],
+      "capabilities": [
+        "product-discovery",
+        "web",
+        "github-coordination"
+      ],
+      "relations": {
+        "dependsOn": [],
+        "reviews": [],
+        "verifies": [],
+        "revises": [],
+        "integrates": []
+      },
+      "risk": {
+        "level": "medium",
+        "reasons": [
+          "Creates externally visible repository labels and work-tracking messages."
+        ],
+        "approvalBoundaries": [
+          "Creating GitHub labels and unassigned issues is explicitly requested by the user."
+        ]
+      },
+      "execution": {
+        "mode": "inline",
+        "isolation": "shared",
+        "readOnly": false,
+        "independent": false,
+        "writeScopes": [
+          "GitHub labels",
+          "GitHub issues"
+        ],
+        "preferredPlatforms": [
+          "codex"
+        ],
+        "owner": "pm-manager"
+      },
+      "status": "done",
+      "attempt": 1,
+      "resultRef": "results/frontend-github-setup-001-2026-08-13T10-20-00-000Z.json",
+      "extensions": {
+        "role": "pm-manager",
+        "phase": "phase-6-experience",
+        "commitScope": "web"
+      }
+    }
+  ]
+}
