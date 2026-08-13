@@ -20,6 +20,12 @@ Kapsamlı planlama, mimari, implementasyon, review, doğrulama, entegrasyon veya
 - Yeni özellik, birden fazla katman, veri kaynağı, harita/konum eşleştirme, risk skoru, kişisel veri, API contract, migration, deployment veya birden fazla agent içeren iş run graph ile yürütülür.
 - Konuşma belleği tamamlanma kanıtı değildir; run, result, review ve doğrulama artifact'leri kanıttır.
 
+### Orantılı run kullanımı
+
+- Aktif bir tasarım veya keşif paketi için tek bir run kullan; her küçük sayfa notu, metin düzeltmesi veya düşük riskli tek dosya değişikliği için yeni work item/result üretme.
+- Bu küçük değişiklikleri ilgili dokümanda doğrudan yap; birikmiş tasarım paketi, ekip handoff'u, önemli karar veya commit/checkpoint sınırında run'a toplu karar ve acceptance kanıtı ekle.
+- Run graph; çoklu agent koordinasyonu, katmanlar arası bağımlılık, contract/veri/risk değişikliği, bağımsız kalite kapısı ve kalıcı teslim kanıtı için kullanılır. Süreç görünürlüğü, gereksiz token/işlem maliyeti yaratacak mikro yönetim anlamına gelmez.
+
 ## Ürün değişmezleri
 
 - “Güvenli bina” veya “kesin risksiz” hükmü üretme.
