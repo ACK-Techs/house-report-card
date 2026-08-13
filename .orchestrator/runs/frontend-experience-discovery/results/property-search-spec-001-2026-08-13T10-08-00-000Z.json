@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-experience-discovery",
+  "itemId": "property-search-spec-001",
+  "agent": {
+    "platform": "codex",
+    "identity": "pm-manager",
+    "sessionRef": null
+  },
+  "outcome": "pass",
+  "summary": "Specified the mobile property-first search flow from administrative area selection to editable map-based building confirmation.",
+  "artifacts": [
+    {
+      "type": "documentation",
+      "path": "docs/frontend-pages/property-search.md",
+      "change": "created",
+      "description": "Property search screen brief."
+    }
+  ],
+  "acceptance": [
+    {
+      "criterion": "The brief makes property/building search the default mode and defines the city-to-neighbourhood, map, pin, and editable confirmation flow.",
+      "status": "passed",
+      "evidence": "The screen opens in Ev / bina ara mode and specifies city, district, neighbourhood, map selection, detail editing, and confirmation."
+    },
+    {
+      "criterion": "The brief covers the map and selection states needed by designers without inventing backend data behavior.",
+      "status": "passed",
+      "evidence": "It defines UI states while explicitly deferring map provider, geocoding, and identity contracts."
+    },
+    {
+      "criterion": "The brief specifies mobile interaction, accessibility, and open decisions.",
+      "status": "passed",
+      "evidence": "Mobile interaction, non-map alternative, permission behavior, and open decisions are separately recorded."
+    }
+  ],
+  "checks": [
+    {
+      "name": "documentation whitespace check",
+      "status": "passed",
+      "evidence": "git diff --check completed successfully with no output."
+    }
+  ],
+  "risks": [
+    "Building identity and administrative location data contracts still require separate backend/geo discovery."
+  ],
+  "followUps": [
+    "Design the separate location-confirmation screen after its data contract is defined."
+  ],
+  "completedAt": "2026-08-13T10:08:00.000Z"
+}

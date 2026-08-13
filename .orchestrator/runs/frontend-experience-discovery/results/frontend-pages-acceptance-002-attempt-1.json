@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-experience-discovery",
+  "itemId": "frontend-pages-acceptance-002",
+  "agent": {"platform": "codex", "identity": "pm-manager", "sessionRef": null},
+  "outcome": "pass",
+  "summary": "Accepted the additional mobile frontend page briefs for handoff and checkpoint delivery.",
+  "artifacts": [{"type": "report", "path": null, "change": "reported", "description": "Acceptance recorded in the persistent run result."}],
+  "acceptance": [
+    {"criterion": "Property search is property-first and preserves editable user confirmation.", "status": "passed", "evidence": "The brief defaults to Ev / bina ara and requires map selection plus editable location/building details before confirmation."},
+    {"criterion": "The report and supporting briefs distinguish settled direction from design freedom and pending details.", "status": "passed", "evidence": "Report categories are examples only and each supporting screen gives purpose plus explicit frontend discretion."},
+    {"criterion": "The briefs are mobile-only and avoid unsafe or unsupported product claims.", "status": "passed", "evidence": "Both briefs use mobile interactions and explicitly prohibit unsupported building safety, score, and data claims."}
+  ],
+  "checks": [{"name": "documentation whitespace check", "status": "passed", "evidence": "git diff --check completed successfully with no output."}],
+  "risks": ["Detailed report content and the geo identity/data contracts are deliberately not yet finalized."],
+  "followUps": ["Create the accepted documentation commits and perform the requested checkpoint push."],
+  "completedAt": "2026-08-13T10:12:00.000Z"
+}

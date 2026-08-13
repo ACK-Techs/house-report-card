@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-experience-discovery",
+  "itemId": "frontend-discovery-acceptance-001",
+  "agent": {"platform": "codex", "identity": "pm-manager", "sessionRef": null},
+  "outcome": "pass",
+  "summary": "Accepted the initial mobile frontend discovery documents for design handoff and checkpoint delivery.",
+  "artifacts": [
+    {"type": "report", "path": null, "change": "reported", "description": "Acceptance recorded in the persistent run result."}
+  ],
+  "acceptance": [
+    {"criterion": "The documents agree on a mobile-only, three-action navigation and the two research modes.", "status": "passed", "evidence": "The overview and home brief both specify floating Home/Search/Profile navigation plus direct property research and area exploration."},
+    {"criterion": "The home brief covers the user-confirmed recent-research and first-use states.", "status": "passed", "evidence": "It defines recent research cards, general location labels, a large first-use illustration, and the primary property-location action."},
+    {"criterion": "Unresolved visual and implementation decisions remain labeled as open or delegated rather than silently decided.", "status": "passed", "evidence": "Optional error-state map use and remaining visual choices are explicitly marked as frontend design decisions."}
+  ],
+  "checks": [
+    {"name": "documentation consistency search", "status": "passed", "evidence": "Key navigation, research-mode, recent-research, and first-use content was found in the two documents."},
+    {"name": "documentation whitespace check", "status": "passed", "evidence": "git diff --check completed successfully with no output."}
+  ],
+  "risks": ["This checkpoint contains planning documentation only; page-level visual design remains an ongoing discussion."],
+  "followUps": ["Commit the two accepted documentation artifacts and deliver the requested origin/main checkpoint."],
+  "completedAt": "2026-08-13T09:57:00.000Z"
+}

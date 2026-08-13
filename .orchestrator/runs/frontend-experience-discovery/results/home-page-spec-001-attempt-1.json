@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-experience-discovery",
+  "itemId": "home-page-spec-001",
+  "agent": {"platform": "codex", "identity": "pm-manager", "sessionRef": null},
+  "outcome": "pass",
+  "summary": "Produced a detailed, state-aware home-screen brief based on the user's recent-research-first direction.",
+  "artifacts": [
+    {"type": "documentation", "path": "docs/frontend-pages/home.md", "change": "created", "description": "Home screen content, states, interactions, visual constraints, and frontend handoff checklist."}
+  ],
+  "acceptance": [
+    {"criterion": "The page brief defines the home screen's hierarchy, entry points, content modules, and persistent navigation.", "status": "passed", "evidence": "The document specifies hierarchy, search modes, content sections, interaction destinations, and the floating three-action navigation."},
+    {"criterion": "The brief separately specifies populated, first-use empty, loading, and recoverable error states.", "status": "passed", "evidence": "Distinct sections cover recent research, first-use empty, loading skeletons, and partial network/history errors."},
+    {"criterion": "The brief defines destinations and interactions without promising unavailable ranking or listing data.", "status": "passed", "evidence": "Navigation mapping avoids popularity/ranking claims and explicitly excludes most-searched places and third-party listings."},
+    {"criterion": "The brief gives visual, responsive, accessibility, and copy constraints useful to a frontend team.", "status": "passed", "evidence": "Visual direction, responsive layout, accessibility requirements, prohibited content, and delivery checklist are all included."}
+  ],
+  "checks": [
+    {"name": "orchestrator run validation", "status": "passed", "evidence": "Validation completed successfully before the work item was activated."},
+    {"name": "documentation whitespace check", "status": "passed", "evidence": "git diff --check exited successfully with no output."}
+  ],
+  "risks": ["Visual decisions such as desktop navigation and illustration style remain intentionally open for user review.", "Recent-research data shape and privacy masking need a future backend/data contract before implementation."],
+  "followUps": ["Review the home-page brief with the user, then create the search-page brief as the next page-level artifact."],
+  "completedAt": "2026-08-13T09:52:00.000Z"
+}

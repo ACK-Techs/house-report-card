@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-experience-discovery",
+  "itemId": "home-page-decisions-002",
+  "agent": {"platform": "codex", "identity": "pm-manager", "sessionRef": null},
+  "outcome": "pass",
+  "summary": "Updated the home-screen brief with the user's confirmed greeting, privacy, first-use, content, error-map, and mobile-only decisions.",
+  "artifacts": [
+    {"type": "documentation", "path": "docs/frontend-pages/home.md", "change": "modified", "description": "Confirmed home-screen direction and removal of desktop guidance."}
+  ],
+  "acceptance": [
+    {"criterion": "The brief uses a named greeting and keeps recent-search location labels general.", "status": "passed", "evidence": "It specifies a 'Merhaba, Ayşe' greeting and neighbourhood-plus-district labels rather than a full address."},
+    {"criterion": "The first-use state encourages research with a large illustration and primary property-location search action without leaving the page visually empty.", "status": "passed", "evidence": "The empty state now requires a large illustration, visual weight, and a prominent 'Ev konumu ara' action."},
+    {"criterion": "The brief removes a separate saved-items home module and marks map use in a recoverable error state as an implementation/design option.", "status": "passed", "evidence": "The home hierarchy contains recent research only; map use is explicitly delegated as an optional, non-primary error-state treatment."}
+  ],
+  "checks": [
+    {"name": "orchestrator run validation", "status": "passed", "evidence": "Validation completed with no errors before the item was activated."},
+    {"name": "documentation whitespace check", "status": "passed", "evidence": "git diff --check completed successfully with no output."}
+  ],
+  "risks": ["The visual style of the empty-state illustration and optional map treatment remain delegated to frontend design."],
+  "followUps": ["Discuss the search screen next, then create its page-level brief."],
+  "completedAt": "2026-08-13T09:54:00.000Z"
+}

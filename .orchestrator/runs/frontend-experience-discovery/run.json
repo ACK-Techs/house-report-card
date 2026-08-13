@@ -1,0 +1,756 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-experience-discovery",
+  "title": "Frontend experience discovery",
+  "goal": "Define the initial Ev Karnesi information architecture, navigation model, and user flows before page-level design.",
+  "createdAt": "2026-08-13T09:46:13.115Z",
+  "updatedAt": "2026-08-13T10:15:16.088Z",
+  "revision": 32,
+  "context": {
+    "requiredPaths": [
+      "AGENTS.md",
+      "README.md",
+      ".orchestrator/PROJECT-STATE.md",
+      ".orchestrator/ARCHITECTURE.md",
+      ".orchestrator/SYSTEM.md",
+      "docs/COMMIT_CONVENTION.md",
+      ".orchestrator/roles/pm-manager.md"
+    ],
+    "optionalPaths": [],
+    "catalogSnapshot": "a7bffc2ca44a8dfc025180e06e37ffabbbe79374e7150ea4bdbf2ead563391c2",
+    "assumptions": []
+  },
+  "constraints": [
+    "Kapsam süre uğruna daraltılmaz; sıra bağımlılık, risk ve acceptance kriterlerine göre belirlenir.",
+    "Veri yokluğu düşük risk; bölgesel tehlike ise gerçek bina dayanımı olarak yorumlanmaz.",
+    "Her önemli türetilmiş sonuç kaynak, tarih, coğrafi çözünürlük, yöntem sürümü ve güven seviyesi taşır.",
+    "Her doğrulanmış write item docs/COMMIT_CONVENTION.md uyarınca atomik commit edilir; writer push yapmaz, accepted checkpoint'i üst orchestrator push eder."
+  ],
+  "policy": {
+    "requiresIntegration": false
+  },
+  "decisions": [
+    {
+      "id": "navigation-model-001",
+      "summary": "Use a floating three-action bottom navigation",
+      "reason": "The user specified home on the left, search in the center, and profile on the right, visually grouped at the bottom center.",
+      "extensions": {
+        "type": "approval",
+        "itemId": "experience-ia-001",
+        "boundary": "Page-level content and visual direction remain subject to user discussion.",
+        "outcome": "approved",
+        "provenance": "user-confirmed"
+      },
+      "decidedAt": "2026-08-13T09:47:09.888Z",
+      "actor": "pm-manager"
+    },
+    {
+      "id": "search-modes-001",
+      "summary": "Support direct property research and area exploration as separate entry modes",
+      "reason": "The user needs both exact address/building investigation and area-level searches such as Avcılar.",
+      "decidedAt": "2026-08-13T09:47:09.917Z",
+      "actor": "pm-manager"
+    },
+    {
+      "id": "home-recent-searches-001",
+      "summary": "Show the user's recent research instead of popularity content on the home screen",
+      "reason": "The user rejected most-searched places as hard to establish and asked for a strong first-use empty state instead.",
+      "extensions": {
+        "type": "approval",
+        "itemId": "home-page-spec-001",
+        "boundary": "Page visual direction remains open for user review.",
+        "outcome": "approved",
+        "provenance": "user-confirmed"
+      },
+      "decidedAt": "2026-08-13T09:50:57.050Z",
+      "actor": "pm-manager"
+    },
+    {
+      "id": "frontend-discovery-push-001",
+      "summary": "Push the accepted frontend discovery checkpoint to origin/main",
+      "reason": "The user explicitly requested commit and push for the completed documentation checkpoint.",
+      "extensions": {
+        "type": "approval",
+        "itemId": "frontend-discovery-checkpoint-001",
+        "boundary": "Push to origin/main explicitly requested by user.",
+        "outcome": "approved",
+        "provenance": "user-confirmed"
+      },
+      "decidedAt": "2026-08-13T09:58:18.392Z",
+      "actor": "pm-manager"
+    },
+    {
+      "id": "frontend-pages-push-002",
+      "summary": "Push the accepted additional frontend page briefs to origin/main",
+      "reason": "The user asked to commit and push the completed page briefs before issue creation begins.",
+      "extensions": {
+        "type": "approval",
+        "itemId": "frontend-pages-checkpoint-002",
+        "boundary": "Push to origin/main explicitly requested by user.",
+        "outcome": "approved",
+        "provenance": "user-confirmed"
+      },
+      "decidedAt": "2026-08-13T10:12:37.646Z",
+      "actor": "pm-manager"
+    },
+    {
+      "id": "proportional-run-use-001",
+      "summary": "Use runs proportionally and batch low-risk design documentation",
+      "reason": "The user asked that agents avoid creating run work items and results for every small page note, while retaining runs for cross-team coordination, major decisions, contracts, risk, and checkpoints.",
+      "decidedAt": "2026-08-13T10:15:16.088Z",
+      "actor": "pm-manager"
+    }
+  ],
+  "items": [
+    {
+      "id": "experience-ia-001",
+      "title": "Document initial frontend information architecture",
+      "kind": "specification",
+      "domains": [
+        "web",
+        "product-discovery"
+      ],
+      "objective": "Record the agreed initial navigation model, core screen inventory, and high-level user flows before page-level design begins.",
+      "responsibility": "Capture only the agreed product direction and open decisions; do not select a frontend stack, define data contracts, or implement screens.",
+      "inputs": [
+        {
+          "type": "path",
+          "value": "README.md",
+          "description": "Product definition and MVP scope"
+        },
+        {
+          "type": "conversation",
+          "value": "User frontend planning discussion",
+          "description": "Confirmed navigation and screen ideas"
+        }
+      ],
+      "outputs": [
+        "docs/frontend-experience-overview.md"
+      ],
+      "acceptanceCriteria": [
+        "The document names the agreed core screens and distinguishes account, search, report, saved, history, settings, help, and future plan areas.",
+        "The document defines a bottom navigation concept and the main flows for onboarding, direct property research, and area exploration.",
+        "Open product and design decisions are explicitly marked for the upcoming page-by-page discussions."
+      ],
+      "capabilities": [
+        "product-discovery",
+        "web"
+      ],
+      "relations": {
+        "dependsOn": [],
+        "reviews": [],
+        "verifies": [],
+        "revises": [],
+        "integrates": []
+      },
+      "risk": {
+        "level": "low",
+        "reasons": [
+          "Planning artifact only; it does not make risk, score, or data-source claims."
+        ],
+        "approvalBoundaries": [
+          "Page-level content and visual direction remain subject to user discussion."
+        ]
+      },
+      "execution": {
+        "mode": "inline",
+        "isolation": "shared",
+        "readOnly": false,
+        "independent": false,
+        "writeScopes": [
+          "docs/frontend-experience-overview.md"
+        ],
+        "preferredPlatforms": [
+          "codex"
+        ],
+        "owner": "pm-manager"
+      },
+      "status": "done",
+      "attempt": 1,
+      "resultRef": "results/experience-ia-001-2026-08-13T09-48-00-000Z.json",
+      "extensions": {
+        "role": "pm-manager",
+        "phase": "phase-0-discovery",
+        "commitScope": "discovery"
+      }
+    },
+    {
+      "id": "home-page-spec-001",
+      "title": "Specify the home research hub",
+      "kind": "specification",
+      "domains": [
+        "web",
+        "product-discovery"
+      ],
+      "objective": "Give frontend designers and developers an implementation-ready content, state, and interaction brief for the Ev Karnesi home screen.",
+      "responsibility": "Define experience requirements only; do not choose a technology, invent ranking data, or implement UI code.",
+      "inputs": [
+        {
+          "type": "path",
+          "value": "docs/frontend-experience-overview.md",
+          "description": "Approved initial information architecture"
+        },
+        {
+          "type": "conversation",
+          "value": "User direction for recent-search-first home content",
+          "description": "Confirmed home-screen priority and empty-state direction"
+        }
+      ],
+      "outputs": [
+        "docs/frontend-pages/home.md"
+      ],
+      "acceptanceCriteria": [
+        "The page brief defines the home screen's hierarchy, entry points, content modules, and persistent navigation.",
+        "The brief separately specifies populated, first-use empty, loading, and recoverable error states.",
+        "The brief defines destinations and interactions without promising unavailable ranking or listing data.",
+        "The brief gives visual, responsive, accessibility, and copy constraints useful to a frontend team."
+      ],
+      "capabilities": [
+        "product-discovery",
+        "web",
+        "accessibility"
+      ],
+      "relations": {
+        "dependsOn": [
+          "experience-ia-001"
+        ],
+        "reviews": [],
+        "verifies": [],
+        "revises": [],
+        "integrates": []
+      },
+      "risk": {
+        "level": "low",
+        "reasons": [
+          "Experience specification only; no external data, scoring, or public risk claim is defined."
+        ],
+        "approvalBoundaries": [
+          "Page visual direction remains open for user review."
+        ]
+      },
+      "execution": {
+        "mode": "inline",
+        "isolation": "shared",
+        "readOnly": false,
+        "independent": false,
+        "writeScopes": [
+          "docs/frontend-pages/home.md"
+        ],
+        "preferredPlatforms": [
+          "codex"
+        ],
+        "owner": "pm-manager"
+      },
+      "status": "done",
+      "attempt": 1,
+      "resultRef": "results/home-page-spec-001-2026-08-13T09-52-00-000Z.json",
+      "extensions": {
+        "role": "pm-manager",
+        "phase": "phase-6-experience",
+        "commitScope": "web"
+      }
+    },
+    {
+      "id": "home-page-decisions-002",
+      "title": "Incorporate confirmed home-screen design decisions",
+      "kind": "specification",
+      "domains": [
+        "web",
+        "product-discovery"
+      ],
+      "objective": "Update the home-screen brief with the user's confirmed content hierarchy and first-use decisions.",
+      "responsibility": "Revise only the home-page documentation; do not implement interface code or decide unresolved error-map behavior.",
+      "inputs": [
+        {
+          "type": "path",
+          "value": "docs/frontend-pages/home.md",
+          "description": "Existing home-screen brief"
+        },
+        {
+          "type": "conversation",
+          "value": "User decisions on greeting, location detail, empty state, and saved content",
+          "description": "Confirmed page-level direction"
+        }
+      ],
+      "outputs": [
+        "docs/frontend-pages/home.md"
+      ],
+      "acceptanceCriteria": [
+        "The brief uses a named greeting and keeps recent-search location labels general.",
+        "The first-use state encourages research with a large illustration and primary property-location search action without leaving the page visually empty.",
+        "The brief removes a separate saved-items home module and marks map use in a recoverable error state as an implementation/design option."
+      ],
+      "capabilities": [
+        "product-discovery",
+        "web"
+      ],
+      "relations": {
+        "dependsOn": [
+          "home-page-spec-001"
+        ],
+        "reviews": [],
+        "verifies": [],
+        "revises": [],
+        "integrates": []
+      },
+      "risk": {
+        "level": "low",
+        "reasons": [
+          "Documentation refinement only."
+        ],
+        "approvalBoundaries": []
+      },
+      "execution": {
+        "mode": "inline",
+        "isolation": "shared",
+        "readOnly": false,
+        "independent": false,
+        "writeScopes": [
+          "docs/frontend-pages/home.md"
+        ],
+        "preferredPlatforms": [
+          "codex"
+        ],
+        "owner": "pm-manager"
+      },
+      "status": "done",
+      "attempt": 1,
+      "resultRef": "results/home-page-decisions-002-2026-08-13T09-54-00-000Z.json",
+      "extensions": {
+        "role": "pm-manager",
+        "phase": "phase-6-experience",
+        "commitScope": "web"
+      }
+    },
+    {
+      "id": "frontend-discovery-acceptance-001",
+      "title": "Accept initial frontend discovery documents",
+      "kind": "pm-acceptance",
+      "domains": [
+        "product-discovery",
+        "web"
+      ],
+      "objective": "Confirm that the initial information architecture and home-page specification are ready for frontend design handoff.",
+      "responsibility": "Assess the documented scope and checks; do not approve implementation, data contracts, or unresolved page design choices.",
+      "inputs": [
+        {
+          "type": "path",
+          "value": "docs/frontend-experience-overview.md",
+          "description": "Information architecture"
+        },
+        {
+          "type": "path",
+          "value": "docs/frontend-pages/home.md",
+          "description": "Home-page brief"
+        }
+      ],
+      "outputs": [
+        "Acceptance result artifact"
+      ],
+      "acceptanceCriteria": [
+        "The documents agree on a mobile-only, three-action navigation and the two research modes.",
+        "The home brief covers the user-confirmed recent-research and first-use states.",
+        "Unresolved visual and implementation decisions remain labeled as open or delegated rather than silently decided."
+      ],
+      "capabilities": [
+        "product-discovery",
+        "web"
+      ],
+      "relations": {
+        "dependsOn": [
+          "experience-ia-001",
+          "home-page-spec-001",
+          "home-page-decisions-002"
+        ],
+        "reviews": [],
+        "verifies": [],
+        "revises": [],
+        "integrates": []
+      },
+      "risk": {
+        "level": "low",
+        "reasons": [
+          "Acceptance of planning documentation only."
+        ],
+        "approvalBoundaries": []
+      },
+      "execution": {
+        "mode": "inline",
+        "isolation": "shared",
+        "readOnly": true,
+        "independent": false,
+        "writeScopes": [],
+        "preferredPlatforms": [
+          "codex"
+        ],
+        "owner": "pm-manager"
+      },
+      "status": "done",
+      "attempt": 1,
+      "resultRef": "results/frontend-discovery-acceptance-001-2026-08-13T09-57-00-000Z.json",
+      "extensions": {
+        "role": "pm-manager",
+        "phase": "phase-6-experience",
+        "commitScope": "web"
+      }
+    },
+    {
+      "id": "frontend-discovery-checkpoint-001",
+      "title": "Deliver initial frontend discovery checkpoint",
+      "kind": "git-checkpoint",
+      "domains": [
+        "orchestrator",
+        "web"
+      ],
+      "objective": "Commit and fast-forward push the accepted frontend discovery documentation to origin/main.",
+      "responsibility": "Validate the accepted documentation commits and remote state; do not force-push or include generated run artifacts by default.",
+      "inputs": [
+        {
+          "type": "path",
+          "value": "docs/frontend-experience-overview.md",
+          "description": "Accepted information architecture"
+        },
+        {
+          "type": "path",
+          "value": "docs/frontend-pages/home.md",
+          "description": "Accepted home-page brief"
+        }
+      ],
+      "outputs": [
+        "Commit SHA and origin/main push evidence"
+      ],
+      "acceptanceCriteria": [
+        "Outgoing commits conform to docs/COMMIT_CONVENTION.md and contain only the accepted documentation artifacts.",
+        "origin/main is fetched and the push is fast-forward without overwriting remote changes.",
+        "The checkpoint result records the remote, branch, and pushed SHA."
+      ],
+      "capabilities": [
+        "git-delivery"
+      ],
+      "relations": {
+        "dependsOn": [
+          "frontend-discovery-acceptance-001"
+        ],
+        "reviews": [],
+        "verifies": [],
+        "revises": [],
+        "integrates": []
+      },
+      "risk": {
+        "level": "medium",
+        "reasons": [
+          "External Git remote write."
+        ],
+        "approvalBoundaries": [
+          "Push to origin/main explicitly requested by user."
+        ]
+      },
+      "execution": {
+        "mode": "inline",
+        "isolation": "shared",
+        "readOnly": false,
+        "independent": false,
+        "writeScopes": [
+          ".git"
+        ],
+        "preferredPlatforms": [
+          "codex"
+        ],
+        "owner": "pm-manager"
+      },
+      "status": "done",
+      "attempt": 1,
+      "resultRef": "results/frontend-discovery-checkpoint-001-2026-08-13T10-01-00-000Z.json",
+      "extensions": {
+        "role": "pm-manager",
+        "phase": "phase-6-experience",
+        "commitScope": "web"
+      }
+    },
+    {
+      "id": "property-search-spec-001",
+      "title": "Specify the property search and map selection screen",
+      "kind": "specification",
+      "domains": [
+        "web",
+        "product-discovery"
+      ],
+      "objective": "Define the mobile property-first search experience from administrative area selection through map pinning and editable building confirmation.",
+      "responsibility": "Describe user experience requirements only; do not define geocoding, building identity, or map-provider contracts.",
+      "inputs": [
+        {
+          "type": "conversation",
+          "value": "User property-search direction",
+          "description": "Confirmed city/district/neighbourhood selection and editable building confirmation"
+        }
+      ],
+      "outputs": [
+        "docs/frontend-pages/property-search.md"
+      ],
+      "acceptanceCriteria": [
+        "The brief makes property/building search the default mode and defines the city-to-neighbourhood, map, pin, and editable confirmation flow.",
+        "The brief covers the map and selection states needed by designers without inventing backend data behavior.",
+        "The brief specifies mobile interaction, accessibility, and open decisions."
+      ],
+      "capabilities": [
+        "product-discovery",
+        "web",
+        "map-selection",
+        "accessibility"
+      ],
+      "relations": {
+        "dependsOn": [
+          "home-page-decisions-002"
+        ],
+        "reviews": [],
+        "verifies": [],
+        "revises": [],
+        "integrates": []
+      },
+      "risk": {
+        "level": "low",
+        "reasons": [
+          "Frontend experience planning only; geospatial identity is not being implemented."
+        ],
+        "approvalBoundaries": []
+      },
+      "execution": {
+        "mode": "inline",
+        "isolation": "shared",
+        "readOnly": false,
+        "independent": false,
+        "writeScopes": [
+          "docs/frontend-pages/property-search.md"
+        ],
+        "preferredPlatforms": [
+          "codex"
+        ],
+        "owner": "pm-manager"
+      },
+      "status": "done",
+      "attempt": 1,
+      "resultRef": "results/property-search-spec-001-2026-08-13T10-08-00-000Z.json",
+      "extensions": {
+        "role": "pm-manager",
+        "phase": "phase-6-experience",
+        "commitScope": "web"
+      }
+    },
+    {
+      "id": "supporting-pages-brief-001",
+      "title": "Brief the report shell and supporting screens",
+      "kind": "specification",
+      "domains": [
+        "web",
+        "product-discovery"
+      ],
+      "objective": "Give frontend developers directional briefs for the report shell and remaining supporting screens while preserving their design discretion where detailed content is not yet decided.",
+      "responsibility": "State known purpose, routes, and constraints without prescribing unagreed fields, scores, or layouts.",
+      "inputs": [
+        {
+          "type": "path",
+          "value": "README.md",
+          "description": "Product report categories and user flows"
+        },
+        {
+          "type": "conversation",
+          "value": "User page-planning direction",
+          "description": "Confirmed report placeholders and developer-led supporting screens"
+        }
+      ],
+      "outputs": [
+        "docs/frontend-pages/report-and-supporting-screens.md"
+      ],
+      "acceptanceCriteria": [
+        "The report brief names only the currently agreed example categories and marks detailed report content as pending.",
+        "Saved, history, comparison, profile, settings, onboarding, help, and plans screens have clear purpose and design freedom boundaries.",
+        "The brief preserves product safety language and does not invent scoring or listing behavior."
+      ],
+      "capabilities": [
+        "product-discovery",
+        "web"
+      ],
+      "relations": {
+        "dependsOn": [
+          "experience-ia-001"
+        ],
+        "reviews": [],
+        "verifies": [],
+        "revises": [],
+        "integrates": []
+      },
+      "risk": {
+        "level": "low",
+        "reasons": [
+          "UI planning only; no risk methodology is defined."
+        ],
+        "approvalBoundaries": []
+      },
+      "execution": {
+        "mode": "inline",
+        "isolation": "shared",
+        "readOnly": false,
+        "independent": false,
+        "writeScopes": [
+          "docs/frontend-pages/report-and-supporting-screens.md"
+        ],
+        "preferredPlatforms": [
+          "codex"
+        ],
+        "owner": "pm-manager"
+      },
+      "status": "done",
+      "attempt": 1,
+      "resultRef": "results/supporting-pages-brief-001-2026-08-13T10-08-00-000Z.json",
+      "extensions": {
+        "role": "pm-manager",
+        "phase": "phase-6-experience",
+        "commitScope": "web"
+      }
+    },
+    {
+      "id": "frontend-pages-acceptance-002",
+      "title": "Accept additional frontend page briefs",
+      "kind": "pm-acceptance",
+      "domains": [
+        "product-discovery",
+        "web"
+      ],
+      "objective": "Confirm the property search, report shell, and supporting page briefs are ready for frontend handoff.",
+      "responsibility": "Accept only planning artifacts; no backend, data, or scoring contract is approved.",
+      "inputs": [
+        {
+          "type": "path",
+          "value": "docs/frontend-pages/property-search.md",
+          "description": "Property search brief"
+        },
+        {
+          "type": "path",
+          "value": "docs/frontend-pages/report-and-supporting-screens.md",
+          "description": "Supporting pages brief"
+        }
+      ],
+      "outputs": [
+        "Acceptance result artifact"
+      ],
+      "acceptanceCriteria": [
+        "Property search is property-first and preserves editable user confirmation.",
+        "The report and supporting briefs distinguish settled direction from design freedom and pending details.",
+        "The briefs are mobile-only and avoid unsafe or unsupported product claims."
+      ],
+      "capabilities": [
+        "product-discovery",
+        "web"
+      ],
+      "relations": {
+        "dependsOn": [
+          "property-search-spec-001",
+          "supporting-pages-brief-001"
+        ],
+        "reviews": [],
+        "verifies": [],
+        "revises": [],
+        "integrates": []
+      },
+      "risk": {
+        "level": "low",
+        "reasons": [
+          "Planning documentation acceptance only."
+        ],
+        "approvalBoundaries": []
+      },
+      "execution": {
+        "mode": "inline",
+        "isolation": "shared",
+        "readOnly": true,
+        "independent": false,
+        "writeScopes": [],
+        "preferredPlatforms": [
+          "codex"
+        ],
+        "owner": "pm-manager"
+      },
+      "status": "done",
+      "attempt": 1,
+      "resultRef": "results/frontend-pages-acceptance-002-2026-08-13T10-12-00-000Z.json",
+      "extensions": {
+        "role": "pm-manager",
+        "phase": "phase-6-experience",
+        "commitScope": "web"
+      }
+    },
+    {
+      "id": "frontend-pages-checkpoint-002",
+      "title": "Deliver additional frontend page briefs checkpoint",
+      "kind": "git-checkpoint",
+      "domains": [
+        "orchestrator",
+        "web"
+      ],
+      "objective": "Commit and fast-forward push the accepted additional frontend page briefs to origin/main.",
+      "responsibility": "Validate the accepted documentation commits and remote state; do not force-push or include generated run artifacts by default.",
+      "inputs": [
+        {
+          "type": "path",
+          "value": "docs/frontend-pages/property-search.md",
+          "description": "Accepted property search brief"
+        },
+        {
+          "type": "path",
+          "value": "docs/frontend-pages/report-and-supporting-screens.md",
+          "description": "Accepted supporting-pages brief"
+        }
+      ],
+      "outputs": [
+        "Commit SHA and origin/main push evidence"
+      ],
+      "acceptanceCriteria": [
+        "Outgoing commits follow the commit convention and contain only accepted documentation artifacts.",
+        "origin/main is fetched and push is fast-forward.",
+        "The result records remote, branch, and pushed SHA."
+      ],
+      "capabilities": [
+        "git-delivery"
+      ],
+      "relations": {
+        "dependsOn": [
+          "frontend-pages-acceptance-002"
+        ],
+        "reviews": [],
+        "verifies": [],
+        "revises": [],
+        "integrates": []
+      },
+      "risk": {
+        "level": "medium",
+        "reasons": [
+          "External Git remote write."
+        ],
+        "approvalBoundaries": [
+          "Push to origin/main explicitly requested by user."
+        ]
+      },
+      "execution": {
+        "mode": "inline",
+        "isolation": "shared",
+        "readOnly": false,
+        "independent": false,
+        "writeScopes": [
+          ".git"
+        ],
+        "preferredPlatforms": [
+          "codex"
+        ],
+        "owner": "pm-manager"
+      },
+      "status": "done",
+      "attempt": 1,
+      "resultRef": "results/frontend-pages-checkpoint-002-2026-08-13T10-15-00-000Z.json",
+      "extensions": {
+        "role": "pm-manager",
+        "phase": "phase-6-experience",
+        "commitScope": "web"
+      }
+    }
+  ]
+}

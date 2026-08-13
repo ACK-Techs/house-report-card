@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-experience-discovery",
+  "itemId": "frontend-pages-checkpoint-002",
+  "agent": {
+    "platform": "codex",
+    "identity": "pm-manager",
+    "sessionRef": null
+  },
+  "outcome": "pass",
+  "summary": "Committed and fast-forward pushed the accepted property-search and supporting-screen briefs to origin/main.",
+  "artifacts": [
+    {
+      "type": "commit",
+      "path": null,
+      "change": "reported",
+      "description": "d16bda1 docs(web): specify property search map selection"
+    },
+    {
+      "type": "commit",
+      "path": null,
+      "change": "reported",
+      "description": "44817e6 docs(web): brief report and supporting screens"
+    },
+    {
+      "type": "remote",
+      "path": null,
+      "change": "reported",
+      "description": "origin/main verified at 44817e6c18c0e792c511288d1d6548a32686aa95"
+    }
+  ],
+  "acceptance": [
+    {
+      "criterion": "Outgoing commits follow the commit convention and contain only accepted documentation artifacts.",
+      "status": "passed",
+      "evidence": "git-checkpoint validate-range origin/main HEAD validated two documentation-only commits."
+    },
+    {
+      "criterion": "origin/main is fetched and push is fast-forward.",
+      "status": "passed",
+      "evidence": "Push output showed 3232b78..44817e6 HEAD -> main; post-push divergence is 0 0."
+    },
+    {
+      "criterion": "The result records remote, branch, and pushed SHA.",
+      "status": "passed",
+      "evidence": "git ls-remote origin refs/heads/main equals local HEAD: 44817e6c18c0e792c511288d1d6548a32686aa95."
+    }
+  ],
+  "checks": [
+    {
+      "name": "commit range validation",
+      "status": "passed",
+      "evidence": "Validated 2 commit(s) in origin/main..HEAD before push."
+    },
+    {
+      "name": "remote head verification",
+      "status": "passed",
+      "evidence": "Remote main and local HEAD have identical SHA; divergence is 0 0."
+    },
+    {
+      "name": "checkpoint helper final output",
+      "status": "not_run",
+      "evidence": "The helper pushed successfully but threw afterwards while trimming inherited git push output; direct remote verification establishes success."
+    }
+  ],
+  "risks": [
+    "The checkpoint helper retains its post-push output-handling defect; no remote state was lost or overwritten."
+  ],
+  "followUps": [
+    "Create and assign frontend work issues from the accepted page briefs."
+  ],
+  "completedAt": "2026-08-13T10:15:00.000Z"
+}

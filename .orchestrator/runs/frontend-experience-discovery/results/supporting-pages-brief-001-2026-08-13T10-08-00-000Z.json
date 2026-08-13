@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-experience-discovery",
+  "itemId": "supporting-pages-brief-001",
+  "agent": {
+    "platform": "codex",
+    "identity": "pm-manager",
+    "sessionRef": null
+  },
+  "outcome": "pass",
+  "summary": "Documented the report shell and directional briefs for the remaining supporting screens without prescribing unagreed content.",
+  "artifacts": [
+    {
+      "type": "documentation",
+      "path": "docs/frontend-pages/report-and-supporting-screens.md",
+      "change": "created",
+      "description": "Report and supporting screen design direction."
+    }
+  ],
+  "acceptance": [
+    {
+      "criterion": "The report brief names only the currently agreed example categories and marks detailed report content as pending.",
+      "status": "passed",
+      "evidence": "It gives example categories such as building age and earthquake/ground context, and delegates field-level report content."
+    },
+    {
+      "criterion": "Saved, history, comparison, profile, settings, onboarding, help, and plans screens have clear purpose and design freedom boundaries.",
+      "status": "passed",
+      "evidence": "Each screen has its purpose and states the boundaries within which frontend can propose its own design."
+    },
+    {
+      "criterion": "The brief preserves product safety language and does not invent scoring or listing behavior.",
+      "status": "passed",
+      "evidence": "The report rules explicitly prohibit safe/risk-free claims and invented scores or listing behavior."
+    }
+  ],
+  "checks": [
+    {
+      "name": "documentation whitespace check",
+      "status": "passed",
+      "evidence": "git diff --check completed successfully with no output."
+    }
+  ],
+  "risks": [
+    "Detailed report categories, scoring, sources, and methodology remain pending product and data decisions."
+  ],
+  "followUps": [
+    "Refine the report after the user provides its detailed content requirements."
+  ],
+  "completedAt": "2026-08-13T10:08:00.000Z"
+}

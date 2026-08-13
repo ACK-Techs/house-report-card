@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-experience-discovery",
+  "itemId": "frontend-discovery-checkpoint-001",
+  "agent": {
+    "platform": "codex",
+    "identity": "pm-manager",
+    "sessionRef": null
+  },
+  "outcome": "pass",
+  "summary": "Committed and fast-forward pushed the accepted frontend discovery documentation to origin/main.",
+  "artifacts": [
+    {
+      "type": "commit",
+      "path": null,
+      "change": "reported",
+      "description": "911e8ef docs(discovery): define initial frontend information architecture"
+    },
+    {
+      "type": "commit",
+      "path": null,
+      "change": "reported",
+      "description": "3232b78 docs(web): specify mobile home research experience"
+    },
+    {
+      "type": "remote",
+      "path": null,
+      "change": "reported",
+      "description": "origin/main verified at 3232b78a1fd3b80f84b1a673e933777ee2f43760"
+    }
+  ],
+  "acceptance": [
+    {
+      "criterion": "Outgoing commits conform to docs/COMMIT_CONVENTION.md and contain only the accepted documentation artifacts.",
+      "status": "passed",
+      "evidence": "git-checkpoint validate-range origin/main HEAD validated both outgoing commits; each commit touched one accepted documentation artifact."
+    },
+    {
+      "criterion": "origin/main is fetched and the push is fast-forward without overwriting remote changes.",
+      "status": "passed",
+      "evidence": "origin/main was fetched before commit; push output showed 6b634db..3232b78 HEAD -> main and post-push divergence is 0 0."
+    },
+    {
+      "criterion": "The checkpoint result records the remote, branch, and pushed SHA.",
+      "status": "passed",
+      "evidence": "git ls-remote origin refs/heads/main equals local HEAD: 3232b78a1fd3b80f84b1a673e933777ee2f43760."
+    }
+  ],
+  "checks": [
+    {
+      "name": "commit range validation",
+      "status": "passed",
+      "evidence": "Validated 2 commit(s) in origin/main..HEAD before push."
+    },
+    {
+      "name": "remote head verification",
+      "status": "passed",
+      "evidence": "Remote main and local HEAD have the same SHA; divergence is 0 0."
+    },
+    {
+      "name": "checkpoint helper final output",
+      "status": "not_run",
+      "evidence": "The helper pushed successfully but threw afterwards while trimming inherited git push output; independent Git verification above establishes push success."
+    }
+  ],
+  "risks": [
+    "The checkpoint helper contains a post-push output-handling defect: it reports an error after a successful inherited-output push. No remote state was lost or overwritten."
+  ],
+  "followUps": [
+    "Continue the frontend page-by-page design discussion with the search screen."
+  ],
+  "completedAt": "2026-08-13T10:01:00.000Z"
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "frontend-experience-discovery",
+  "itemId": "experience-ia-001",
+  "agent": {
+    "platform": "codex",
+    "identity": "pm-manager",
+    "sessionRef": null
+  },
+  "outcome": "pass",
+  "summary": "Recorded the agreed initial frontend information architecture, floating three-action navigation, core screens, and primary research flows.",
+  "artifacts": ["docs/frontend-experience-overview.md"],
+  "acceptance": [
+    {
+      "criterion": "The document names the agreed core screens and distinguishes account, search, report, saved, history, settings, help, and future plan areas.",
+      "status": "passed",
+      "evidence": "The Core screens section lists all fourteen areas, including their distinct report, account, and future-plan purposes."
+    },
+    {
+      "criterion": "The document defines a bottom navigation concept and the main flows for onboarding, direct property research, and area exploration.",
+      "status": "passed",
+      "evidence": "The document defines Home, Search, and Profile in the floating bottom navigation and gives three named end-to-end flows."
+    },
+    {
+      "criterion": "Open product and design decisions are explicitly marked for the upcoming page-by-page discussions.",
+      "status": "passed",
+      "evidence": "The Open decisions section lists unresolved visual, content, data-source, plan, comparison, and onboarding choices."
+    }
+  ],
+  "checks": [
+    {
+      "name": "orchestrator run validation",
+      "command": "node .orchestrator/bin/orchestrator.mjs validate .orchestrator/runs/frontend-experience-discovery/run.json",
+      "status": "passed",
+      "evidence": "Validation returned valid: true with no errors or warnings."
+    },
+    {
+      "name": "documentation whitespace check",
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "Command exited successfully with no output."
+    }
+  ],
+  "risks": ["No page-level visual design, data contract, or monetization decision has been finalized; these remain intentionally open."],
+  "followUps": ["Create and discuss one page-level design note at a time, beginning with the home/research hub."],
+  "completedAt": "2026-08-13T09:48:00.000Z"
+}
