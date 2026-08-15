@@ -1,5 +1,5 @@
 # Ev Karnesi
-
+ 
 Ev Karnesi, bir evi satın almadan veya kiralamadan önce yalnızca ilan sahibinin ya da emlak danışmanının verdiği bilgilerle yetinmek istemeyen kullanıcılar için tasarlanan konum tabanlı konut inceleme ve karar destek uygulamasıdır.
 
 Kullanıcı bir adres girerek, haritada binayı işaretleyerek veya bulunduğu konumda yapının dış cephesini görüntüleyerek inceleme başlatır. Uygulama; yapı, zemin, doğal afet, çevre, ulaşım, iklim ve günlük yaşam verilerini bir araya getirerek açıklanabilir bir **Ev Karnesi** oluşturur.
