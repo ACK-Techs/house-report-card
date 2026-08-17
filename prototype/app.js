@@ -133,11 +133,24 @@ function nextSurveyStep() {
     currentSurveyStep++;
     renderSurveyStep();
   } else {
-    // 5. Adım tamamlandı, ana sayfaya geç
-    currentSurveyStep = 1;
-    renderSurveyStep();
-    navigateTo('home');
+    // 5. Adım tamamlandı -> Şık Başarı Modalını Aç
+    const modal = document.getElementById('surveySuccessModal');
+    if (modal) {
+      modal.classList.add('show');
+    } else {
+      navigateTo('home');
+    }
   }
+}
+
+function closeSurveyModalAndGoHome() {
+  const modal = document.getElementById('surveySuccessModal');
+  if (modal) {
+    modal.classList.remove('show');
+  }
+  currentSurveyStep = 1;
+  renderSurveyStep();
+  navigateTo('home');
 }
 
 function prevSurveyStep() {

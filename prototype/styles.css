@@ -911,3 +911,106 @@ body {
   margin-top: 20px;
 }
 
+/* Modern Success Card & Summary */
+.modern-success-card {
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.95) 0%, rgba(240, 249, 255, 0.95) 100%);
+  border: 1px solid #A7F3D0;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-top: 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px -2px rgba(5, 150, 105, 0.08);
+}
+
+.modern-success-card::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.success-header-flex {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.success-icon-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #059669, #10B981);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.25);
+  flex-shrink: 0;
+}
+
+/* Modern Popup Overlay / Modal */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modern-popup-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  padding: 28px 22px;
+  text-align: center;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  width: 100%;
+  max-width: 340px;
+  animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.88); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.popup-check-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+  border: 2px solid #A7F3D0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 16px;
+  box-shadow: 0 8px 20px rgba(5, 150, 105, 0.2);
+  animation: bounceIn 0.5s ease;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+
