@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ev Karnesi — Mobil İnteraktif Prototip (14 Ekran)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       PROTOTYPE TOP CONTROLLER BAR
+       ========================================================================== -->
+  <header class="proto-header">
+    <div class="proto-brand">
+      <div class="proto-brand-icon">🏡</div>
+      <div>
+        <h1>Ev Karnesi — Mobil Prototip</h1>
+        <span>Phase 6 Mobil Tasarım Sistemi (14 Ekran)</span>
+      </div>
+    </div>
+
+    <div class="proto-controls">
+      <div class="proto-select-wrapper">
+        <label for="screenSelect">Ekran Seç:</label>
+        <select id="screenSelect" class="proto-select" onchange="navigateTo(this.value)">
+          <optgroup label="1. Giriş & Keşif">
+            <option value="welcome">01. Karşılama, Giriş & Kayıt</option>
+            <option value="survey">02. Kişiselleştirme Anketi</option>
+            <option value="home" selected>03. Ana Sayfa (Araştırma Merkezi)</option>
+          </optgroup>
+          <optgroup label="2. Arama & Konum">
+            <option value="property-search">04. Ev / Bina Arama & Harita</option>
+            <option value="confirm-location">05. Konumu Doğrula (Sheet)</option>
+            <option value="area-search">06. Bölge Keşfi</option>
+          </optgroup>
+          <optgroup label="3. Raporlar & Kıyaslama">
+            <option value="property-report">07. Bina / Ev Karnesi Raporu</option>
+            <option value="area-report">08. Bölge Raporu</option>
+            <option value="compare">09. Karşılaştırma</option>
+          </optgroup>
+          <optgroup label="4. Hesap & Araçlar">
+            <option value="saved">10. Kaydedilenler</option>
+            <option value="history">11. İnceleme Geçmişi</option>
+            <option value="profile">12. Profil & Önceliklerim</option>
+            <option value="settings">13. Ayarlar & Gizlilik</option>
+            <option value="help">14. Yardım & Metodoloji</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <button class="proto-btn" onclick="toggleDeviceFrame()">
+        <span>📱 Mobil Çerçeve</span>
+      </button>
+      <button class="proto-btn" onclick="resetPrototype()">
+        <span>🔄 Başa Dön</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MOBILE DEVICE MOCKUP FRAME
+       ========================================================================== -->
+  <main class="device-container" id="deviceContainer">
+    <div class="device-frame" id="deviceFrame">
+      
+      <!-- Status Bar -->
+      <div class="phone-top-bar">
+        <span id="currentTime">18:30</span>
+        <div class="phone-island"></div>
+        <div class="phone-icons">
+          <span>5G</span>
+          <span>●●●</span>
+          <span>100%</span>
+        </div>
+      </div>
+
+      <!-- App Viewport -->
+      <div class="app-viewport">
+
+        <!-- ==================================================================
+             01. KARŞILAMA, GİRİŞ & KAYIT (/welcome)
+             ================================================================== -->
+        <section id="screen-welcome" class="screen no-nav">
+          <div style="padding: 40px 24px 24px; display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
+            <div style="text-align: center; margin-top: 30px;">
+              <div style="width: 72px; height: 72px; background: linear-gradient(135deg, #0284C7, #38BDF8); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 20px; box-shadow: 0 10px 25px rgba(2, 132, 199, 0.4);">
+                🏡
+              </div>
+              <h2 style="font-size: 26px; font-weight: 800; color: #0F172A; margin-bottom: 8px;">Ev Karnesi</h2>
+              <p style="font-size: 14px; color: #475569; line-height: 1.5; max-width: 280px; margin: 0 auto;">
+                Konut satın alma ve kiralama kararlarında kaynaklı, şeffaf ve bağımsız karar desteği.
+              </p>
+            </div>
+
+            <div style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #E2E8F0; box-shadow: var(--shadow-sm);">
+              <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                <button class="choice-chip selected" style="flex: 1; justify-content: center;" onclick="setAuthTab('login')">Giriş Yap</button>
+                <button class="choice-chip" style="flex: 1; justify-content: center;" onclick="setAuthTab('register')">Kayıt Ol</button>
+              </div>
+              
+              <div class="input-group">
+                <label class="input-label">E-posta Adresi</label>
+                <input type="email" class="input-control" placeholder="adiniz@ornek.com" value="dogukan@acktechs.com">
+              </div>
+              <div class="input-group">
+                <label class="input-label">Şifre</label>
+                <input type="password" class="input-control" value="••••••••••••">
+              </div>
+              
+              <button class="btn-primary" style="margin-top: 8px;" onclick="navigateTo('survey')">
+                Devam Et →
+              </button>
+              
+              <button class="btn-secondary" style="margin-top: 10px;" onclick="navigateTo('home')">
+                Giriş Yapmadan Devam Et
+              </button>
+            </div>
+
+            <p style="text-align: center; font-size: 11px; color: #94A3B8;">
+              Devam ederek Kullanım Şartları ve Gizlilik Politikasını kabul etmiş olursunuz.
+            </p>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             02. KİŞİSELLEŞTİRME ANKETİ (/onboarding/survey)
+             ================================================================== -->
+        <section id="screen-survey" class="screen no-nav">
+          <div class="screen-header">
+            <button class="header-back-btn" onclick="navigateTo('welcome')">←</button>
+            <span class="screen-title">Önceliklerini Belirle</span>
+            <button class="header-action-btn" onclick="navigateTo('home')">Atla</button>
+          </div>
+
+          <div style="padding: 20px;">
+            <!-- Progress Bar -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+              <span style="font-size: 12px; font-weight: 700; color: var(--color-accent);">Adım 1 / 5</span>
+              <span style="font-size: 12px; color: var(--color-text-secondary);">Hane ve Kullanım</span>
+            </div>
+            <div style="height: 6px; background: #E2E8F0; border-radius: 3px; margin-bottom: 20px; overflow: hidden;">
+              <div style="width: 25%; height: 100%; background: var(--color-accent); border-radius: 3px;"></div>
+            </div>
+
+            <div class="card">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">Bu evi kimin için araştırıyorsun?</h3>
+              <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 16px;">
+                Rapor sonuçlarındaki kategori ağırlıkları bu tercihlere göre şekillenecektir.
+              </p>
+
+              <div class="chips-grid">
+                <div class="choice-chip selected" onclick="toggleChip(this)">👨‍👩‍👧‍👦 Çocuklu Aile</div>
+                <div class="choice-chip" onclick="toggleChip(this)">💼 Tek / Çift Yaşayan</div>
+                <div class="choice-chip" onclick="toggleChip(this)">🎓 Öğrenci</div>
+                <div class="choice-chip" onclick="toggleChip(this)">💻 Uzaktan Çalışan</div>
+                <div class="choice-chip" onclick="toggleChip(this)">👵 Yaşlı / Kısıtlı Birey</div>
+                <div class="choice-chip" onclick="toggleChip(this)">📈 Yatırım Amaçlı</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">En önemli 2 önceliğin nedir?</h3>
+              <div class="chips-grid" style="margin-bottom: 0;">
+                <div class="choice-chip selected" onclick="toggleChip(this)">🛡️ Deprem ve Zemin Güveni</div>
+                <div class="choice-chip selected" onclick="toggleChip(this)">🚇 Metro ve Ulaşım Yakınlığı</div>
+                <div class="choice-chip" onclick="toggleChip(this)">🏫 Okul ve Kreş Erişimi</div>
+                <div class="choice-chip" onclick="toggleChip(this)">🌳 Park ve Yeşil Alanlar</div>
+                <div class="choice-chip" onclick="toggleChip(this)">☀️ Güneş ve İklim Konforu</div>
+                <div class="choice-chip" onclick="toggleChip(this)">🤫 Sessizlik ve Düşük Gürültü</div>
+              </div>
+            </div>
+
+            <button class="btn-primary" style="margin-top: 16px;" onclick="navigateTo('home')">
+              Tercihleri Kaydet ve Başla →
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             03. ANA SAYFA — ARAŞTIRMA MERKEZİ (/home)
+             ================================================================== -->
+        <section id="screen-home" class="screen active">
+          <div style="padding: 20px 20px 10px;">
+            <!-- Greeting Header -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px;">
+              <div>
+                <h2 style="font-size: 20px; font-weight: 800; color: var(--color-text);">Merhaba, Doğukan 👋</h2>
+                <p style="font-size: 13px; color: var(--color-text-secondary); margin-top: 2px;">
+                  Bir evi incele veya bir bölgeyi keşfet.
+                </p>
+              </div>
+              <div onclick="navigateTo('profile')" style="width: 40px; height: 40px; border-radius: 50%; background: #E0F2FE; color: #0284C7; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; cursor: pointer; border: 2px solid white; box-shadow: var(--shadow-sm);">
+                DT
+              </div>
+            </div>
+
+            <!-- Big Search Action Bar -->
+            <div class="card card-clickable" onclick="navigateTo('property-search')" style="border-color: #BAE6FD; background: #F0F9FF; display: flex; align-items: center; gap: 12px; padding: 14px 16px; margin-bottom: 16px;">
+              <span style="font-size: 20px;">🔍</span>
+              <div style="flex: 1;">
+                <div style="font-size: 14px; font-weight: 700; color: #0369A1;">Adres, bina veya mahalle ara</div>
+                <div style="font-size: 11px; color: #0284C7;">Haritadan seç veya ilçe keşfet</div>
+              </div>
+              <span style="font-size: 16px; color: #0284C7;">➔</span>
+            </div>
+
+            <!-- Two Main Modes -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+              <div class="card card-clickable" onclick="navigateTo('property-search')" style="margin-bottom: 0; padding: 16px 14px;">
+                <div style="font-size: 26px; margin-bottom: 8px;">🏠</div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--color-text);">Bir Evi İncele</div>
+                <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 4px; line-height: 1.3;">
+                  Haritada binayı seç, 7 boyutlu karnesini gör.
+                </div>
+              </div>
+              <div class="card card-clickable" onclick="navigateTo('area-search')" style="margin-bottom: 0; padding: 16px 14px;">
+                <div style="font-size: 26px; margin-bottom: 8px;">🗺️</div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--color-text);">Bölgeyi Keşfet</div>
+                <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 4px; line-height: 1.3;">
+                  İlçe/mahalle afet, ulaşım ve yaşam haritası.
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Researches Section -->
+            <div class="section-header">
+              <span class="section-title">Son İncelemelerin</span>
+              <span class="section-link" onclick="navigateTo('history')">Tümünü Gör (3)</span>
+            </div>
+
+            <div class="card card-clickable" onclick="navigateTo('property-report')">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+                <div>
+                  <span class="badge badge-confidence">Kadıköy / Caferağa</span>
+                  <h4 style="font-size: 14px; font-weight: 700; margin-top: 4px;">Moda Cd. No: 42</h4>
+                </div>
+                <div style="text-align: right;">
+                  <span style="font-size: 16px; font-weight: 800; color: var(--color-accent);">82 / 100</span>
+                  <div style="font-size: 10px; color: var(--color-text-muted);">Uyum Skoru</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 8px;">
+                <span class="badge badge-low">🛡️ Düşük Zemin Riski</span>
+                <span class="badge badge-low">🚇 4 Dk Metro</span>
+              </div>
+            </div>
+
+            <div class="card card-clickable" onclick="navigateTo('property-report')">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+                <div>
+                  <span class="badge badge-confidence">Beşiktaş / Abbasağa</span>
+                  <h4 style="font-size: 14px; font-weight: 700; margin-top: 4px;">Ihlamur Yolu Sk. No: 18</h4>
+                </div>
+                <div style="text-align: right;">
+                  <span style="font-size: 16px; font-weight: 800; color: var(--risk-medium);">68 / 100</span>
+                  <div style="font-size: 10px; color: var(--color-text-muted);">Uyum Skoru</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 8px;">
+                <span class="badge badge-medium">⚠️ 1999 Öncesi Bina</span>
+                <span class="badge badge-low">🌳 Park Yakını</span>
+              </div>
+            </div>
+
+            <!-- Priority Callout -->
+            <div class="callout-box" onclick="navigateTo('profile')" style="cursor: pointer;">
+              <strong>💡 Profil Hatırlatması</strong>
+              Önceliklerinize göre sonuçları daha hassas düzenlemek için profil ayarlarınızı güncelleyebilirsiniz.
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             04. EV / BİNA ARAMA & HARİTA SEÇİMİ (/search/property)
+             ================================================================== -->
+        <section id="screen-property-search" class="screen">
+          <div class="screen-header">
+            <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+            <span class="screen-title">Ev / Bina Ara</span>
+            <button class="header-action-btn" onclick="navigateTo('area-search')">Bölge Ara</button>
+          </div>
+
+          <div style="padding: 16px;">
+            <!-- Dropdown selections -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+              <div>
+                <label class="input-label" style="font-size: 11px;">İl</label>
+                <select class="input-control" style="padding: 8px 6px; font-size: 12px;">
+                  <option selected>İstanbul</option>
+                  <option>Ankara</option>
+                  <option>İzmir</option>
+                </select>
+              </div>
+              <div>
+                <label class="input-label" style="font-size: 11px;">İlçe</label>
+                <select class="input-control" style="padding: 8px 6px; font-size: 12px;" onchange="updateMapFocus(this.value)">
+                  <option selected>Kadıköy</option>
+                  <option>Beşiktaş</option>
+                  <option>Avcılar</option>
+                  <option>Üsküdar</option>
+                </select>
+              </div>
+              <div>
+                <label class="input-label" style="font-size: 11px;">Mahalle</label>
+                <select class="input-control" style="padding: 8px 6px; font-size: 12px;">
+                  <option selected>Caferağa</option>
+                  <option>Moda</option>
+                  <option>Caddebostan</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Simulated Interactive Map -->
+            <div class="map-viewport" id="mapCanvas">
+              <div class="map-grid-bg"></div>
+              
+              <!-- Roads -->
+              <div class="map-roads">
+                <div class="map-road-line" style="top: 110px; left: 0; right: 0; height: 18px;"></div>
+                <div class="map-road-line" style="top: 0; bottom: 0; left: 140px; width: 18px;"></div>
+              </div>
+
+              <!-- Interactive Building Polygons -->
+              <div class="map-building" style="top: 30px; left: 30px; width: 80px; height: 60px;" onclick="selectBuilding(this, 'Moda Cd. No: 38', '1996 Yapımı (5 Kat)')">No: 38</div>
+              <div class="map-building selected" style="top: 30px; left: 180px; width: 90px; height: 60px;" onclick="selectBuilding(this, 'Moda Cd. No: 42', '2014 Yapımı (6 Kat)')">No: 42</div>
+              <div class="map-building" style="top: 150px; left: 30px; width: 85px; height: 75px;" onclick="selectBuilding(this, 'Şair Latifi Sk. No: 7', '2005 Yapımı (4 Kat)')">No: 7</div>
+              <div class="map-building" style="top: 150px; left: 180px; width: 80px; height: 70px;" onclick="selectBuilding(this, 'Aynalı Çeşme Sk. No: 12', '1988 Yapımı (5 Kat)')">No: 12</div>
+
+              <div class="map-pin-pulse" style="top: 60px; left: 225px;">📍</div>
+
+              <!-- Map Tools Overlay -->
+              <div class="map-controls-overlay">
+                <button class="map-tool-btn" title="Yaklaş">+</button>
+                <button class="map-tool-btn" title="Uzaklaş">-</button>
+                <button class="map-tool-btn" title="Konumumu Bul" onclick="alert('Mevcut GPS konumu simüle edildi.')">🎯</button>
+              </div>
+
+              <div style="position: absolute; bottom: 8px; left: 8px; background: rgba(15,23,42,0.8); color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px;">
+                👆 Seçmek için binaya dokunun
+              </div>
+            </div>
+
+            <!-- Selected Location Summary Card -->
+            <div class="card" style="border-color: #BAE6FD; background: #FFFFFF; padding: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span class="badge badge-confidence" id="selectedBuildingBadge">Kadıköy / Caferağa</span>
+                <button style="background: none; border: none; color: var(--color-accent); font-size: 12px; font-weight: 700; cursor: pointer;" onclick="openConfirmSheet()">Düzenle ✎</button>
+              </div>
+              <h4 style="font-size: 15px; font-weight: 800;" id="selectedBuildingTitle">Moda Cd. No: 42</h4>
+              <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 2px;" id="selectedBuildingMeta">
+                2014 Yapımı • 6 Kat • Parsel Eşleşme Güveni: Yüksek
+              </p>
+            </div>
+
+            <button class="btn-primary" onclick="openConfirmSheet()">
+              Bu Konumu İncele →
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             05. KONUMU DOĞRULA (BOTTOM SHEET / MODAL) (/search/confirm)
+             ================================================================== -->
+        <section id="screen-confirm-location" class="screen no-nav" style="background: rgba(15,23,42,0.6);">
+          <div class="bottom-sheet show">
+            <div class="sheet-handle"></div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h3 style="font-size: 16px; font-weight: 800;">Konumu ve Bina Bilgisini Doğrula</h3>
+              <span style="font-size: 18px; cursor: pointer;" onclick="navigateTo('property-search')">✕</span>
+            </div>
+
+            <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 16px;">
+              Rapor üretilmeden önce sistemin bulduğu adres detaylarını gözden geçirebilir veya düzenleyebilirsiniz.
+            </p>
+
+            <div class="input-group">
+              <label class="input-label">Seçilen Adres</label>
+              <input type="text" class="input-control" value="Caferağa Mah. Moda Cd. Kadıköy / İstanbul">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
+              <div class="input-group" style="margin-bottom: 0;">
+                <label class="input-label">Bina / Kapı No</label>
+                <input type="text" class="input-control" value="42">
+              </div>
+              <div class="input-group" style="margin-bottom: 0;">
+                <label class="input-label">Daire / Kat (Opsiyonel)</label>
+                <input type="text" class="input-control" placeholder="Kat: 3">
+              </div>
+            </div>
+
+            <div class="callout-box" style="margin-bottom: 16px; font-size: 12px;">
+              <strong>ℹ️ Ön Bilgilendirme</strong>
+              Ev Karnesi mühendislik dayanıklılık testi değildir; resmi ve açık verileri derleyen bir ön karar destek raporudur.
+            </div>
+
+            <button class="btn-primary" onclick="generateReportAndNavigate()">
+              Karnesini Hazırla ve Gör ⚡
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             06. BÖLGE KEŞFİ (/search/area)
+             ================================================================== -->
+        <section id="screen-area-search" class="screen">
+          <div class="screen-header">
+            <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+            <span class="screen-title">Bölge Keşfi</span>
+            <button class="header-action-btn" onclick="navigateTo('property-search')">Bina Ara</button>
+          </div>
+
+          <div style="padding: 16px;">
+            <div class="input-group">
+              <input type="text" class="input-control" placeholder="İlçe veya Mahalle ara (Ör. Avcılar, Kadıköy)" value="Kadıköy / Moda">
+            </div>
+
+            <!-- Filter chips -->
+            <div class="chips-grid">
+              <div class="choice-chip selected" onclick="toggleChip(this)">Tümü</div>
+              <div class="choice-chip" onclick="toggleChip(this)">🛡️ Sağlam Zemin</div>
+              <div class="choice-chip" onclick="toggleChip(this)">🚇 Raylı Sistem</div>
+              <div class="choice-chip" onclick="toggleChip(this)">🌳 Yeşil Alan</div>
+            </div>
+
+            <!-- Simulated Area Map View -->
+            <div class="map-viewport" style="height: 240px;">
+              <div class="map-grid-bg"></div>
+              <div style="position: absolute; inset: 20px; border: 2px dashed #0284C7; background: rgba(2,132,199,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #0369A1;">
+                📍 Moda Bölge Sınırları
+              </div>
+            </div>
+
+            <div class="card card-clickable" onclick="navigateTo('area-report')">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <h4 style="font-size: 15px; font-weight: 800;">Kadıköy — Moda Bölge Karnesi</h4>
+                <span class="badge badge-low">Bölge Skoru: 84</span>
+              </div>
+              <p style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.4;">
+                Toplu ulaşım zengin, zemin sınıfı genel olarak stabil, sosyal ve yeşil alan erişimi yüksek.
+              </p>
+              <div style="margin-top: 10px; font-size: 12px; font-weight: 700; color: var(--color-accent);">
+                Bölge Raporunu İncele →
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             07. BİNA / EV RAPORU (/report/property/:id)
+             ================================================================== -->
+        <section id="screen-property-report" class="screen">
+          <div class="screen-header">
+            <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+            <span class="screen-title">Ev Karnesi Raporu</span>
+            <button class="header-action-btn" onclick="navigateTo('compare')">Kıyasla</button>
+          </div>
+
+          <div style="padding: 16px;">
+            <!-- Report Hero Summary -->
+            <div class="card" style="background: linear-gradient(135deg, #0F172A, #1E293B); color: white; border: none; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <span class="badge badge-confidence" style="background: rgba(255,255,255,0.15); color: #7DD3FC; border-color: rgba(255,255,255,0.2);">Kadıköy / Caferağa</span>
+                  <h3 style="font-size: 18px; font-weight: 800; margin-top: 6px; color: #FFFFFF;">Moda Cd. No: 42</h3>
+                  <div style="font-size: 11px; color: #94A3B8; margin-top: 2px;">Rapor Tarihi: 17 Ağustos 2026 • v1.2</div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-size: 28px; font-weight: 800; color: #38BDF8;">82<span style="font-size: 14px; color: #94A3B8;">/100</span></div>
+                  <div style="font-size: 10px; color: #7DD3FC; font-weight: 600;">Kişisel Uyum Skoru</div>
+                </div>
+              </div>
+
+              <!-- Quick Actions -->
+              <div style="display: flex; gap: 8px; margin-top: 16px;">
+                <button class="proto-btn" style="flex: 1; justify-content: center;" onclick="alert('Rapor kaydedilenlere eklendi!')">💾 Kaydet</button>
+                <button class="proto-btn" style="flex: 1; justify-content: center;" onclick="navigateTo('compare')">⚖️ Karşılaştır</button>
+                <button class="proto-btn" style="flex: 1; justify-content: center;" onclick="alert('Rapor linki kopyalandı.')">🔗 Paylaş</button>
+              </div>
+            </div>
+
+            <!-- "Uzmana Sorulacaklar" Callout -->
+            <div class="callout-box" style="margin-bottom: 16px;">
+              <strong>⚠️ Uzmana / Ev Sahibine Sorulacaklar</strong>
+              • Binanın 2018 Türkiye Bina Deprem Yönetmeliği'ne göre güçlendirme kaydı var mı?<br>
+              • Zemin katında kolon kesme/dükkan tadilatı yapılmış mı?
+            </div>
+
+            <div class="section-title" style="margin-bottom: 10px;">7 Kategori Detay Karnesi</div>
+
+            <!-- Accordion Categories -->
+            <!-- 1. Bina & Yapı -->
+            <div class="accordion-item open">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-header-left">
+                  <div class="accordion-icon">🏗️</div>
+                  <div>
+                    <div class="accordion-title">1. Bina ve Yapı Bilgisi</div>
+                    <div class="accordion-subtitle">2014 Yapımı • 6 Kat • Betonarme</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="badge badge-low">İyi</span>
+                  <span class="accordion-chevron">▼</span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="data-row">
+                  <span class="data-label">Tahmini Bina Yaşı:</span>
+                  <span class="data-val">12 Yıl (2014)</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Deprem Yönetmeliği:</span>
+                  <span class="data-val">2007 TDY Dönemi</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Ruhsat & İzin Durumu:</span>
+                  <span class="data-val">Yapı Kullanma İzinli</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Veri Kaynağı & Güven:</span>
+                  <span class="badge badge-confidence">●●● İBB Ruhsat Arşivi</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Deprem ve Zemin -->
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-header-left">
+                  <div class="accordion-icon">🛡️</div>
+                  <div>
+                    <div class="accordion-title">2. Deprem ve Zemin Koşulları</div>
+                    <div class="accordion-subtitle">Zemin Sınıfı: ZB/ZC • Sıvılaşma: Düşük</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="badge badge-low">Düşük Tehlike</span>
+                  <span class="accordion-chevron">▼</span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="data-row">
+                  <span class="data-label">Ana Faya Mesafe:</span>
+                  <span class="data-val">~14.2 km (Kuzey Marmara Fayı)</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Sıvılaşma Riski:</span>
+                  <span class="data-val">Düşük / Kaya Zemin</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Veri Kaynağı & Çözünürlük:</span>
+                  <span class="badge badge-confidence">●●● AFAD & İBB Mikrobölgeleme</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Diğer Doğal Afetler -->
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-header-left">
+                  <div class="accordion-icon">🌊</div>
+                  <div>
+                    <div class="accordion-title">3. Diğer Doğal Afetler</div>
+                    <div class="accordion-subtitle">Sel, Heyelan ve Eğim Riski</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="badge badge-low">Risksiz</span>
+                  <span class="accordion-chevron">▼</span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="data-row">
+                  <span class="data-label">Sel / Su Baskını:</span>
+                  <span class="data-val">Taşkın Havzası Dışında</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Heyelan Göstergesi:</span>
+                  <span class="data-val">Stabil Eğim (< %5)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Konum ve İklim Konforu -->
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-header-left">
+                  <div class="accordion-icon">☀️</div>
+                  <div>
+                    <div class="accordion-title">4. Konum & İklim Konforu</div>
+                    <div class="accordion-subtitle">Güneybatı Cephe • Güneş: ~5.5 sa/gün</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="badge badge-low">Yüksek</span>
+                  <span class="accordion-chevron">▼</span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="data-row">
+                  <span class="data-label">Rakım:</span>
+                  <span class="data-val">28 metre</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Gürültü Seviyesi:</span>
+                  <span class="data-val">Orta (Caddeye Yakın)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Ulaşım ve Erişilebilirlik -->
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-header-left">
+                  <div class="accordion-icon">🚇</div>
+                  <div>
+                    <div class="accordion-title">5. Ulaşım ve Erişilebilirlik</div>
+                    <div class="accordion-subtitle">Tramvay: 2 Dk • Vapur: 6 Dk • Metro: 8 Dk</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="badge badge-low">Mükemmel</span>
+                  <span class="accordion-chevron">▼</span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="data-row">
+                  <span class="data-label">M4 Metro İstasyonu:</span>
+                  <span class="data-val">650 metre (~8 dk yürüme)</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">T3 Tramvay:</span>
+                  <span class="data-val">120 metre (~2 dk yürüme)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Günlük Yaşam & Mahalle -->
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-header-left">
+                  <div class="accordion-icon">🛒</div>
+                  <div>
+                    <div class="accordion-title">6. Günlük Yaşam & Mahalle</div>
+                    <div class="accordion-subtitle">Park, Eczane, Market, Okul</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="badge badge-low">Zengin</span>
+                  <span class="accordion-chevron">▼</span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="data-row">
+                  <span class="data-label">Moda Sahil Parkı:</span>
+                  <span class="data-val">250 metre</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Acil Toplanma Alanı:</span>
+                  <span class="data-val">180 metre (Moda İlkokulu Bahçesi)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. Kişiselleştirilmiş Uygunluk -->
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-header-left">
+                  <div class="accordion-icon">🎯</div>
+                  <div>
+                    <div class="accordion-title">7. Kişiselleştirilmiş Uygunluk</div>
+                    <div class="accordion-subtitle">"Çocuklu Aile" & "Deprem Hassasiyeti"</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="badge badge-low">%82 Uyum</span>
+                  <span class="accordion-chevron">▼</span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <p style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.4;">
+                  Bu ev, belirlediğiniz deprem güvenliği ve ulaşım öncelikleriyle yüksek oranda örtüşmektedir.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             08. BÖLGE RAPORU (/report/area/:id)
+             ================================================================== -->
+        <section id="screen-area-report" class="screen">
+          <div class="screen-header">
+            <button class="header-back-btn" onclick="navigateTo('area-search')">←</button>
+            <span class="screen-title">Bölge Raporu</span>
+            <button class="header-action-btn" onclick="alert('Bölge kaydedildi.')">Kaydet</button>
+          </div>
+
+          <div style="padding: 16px;">
+            <div class="card" style="background: linear-gradient(135deg, #0369A1, #0284C7); color: white; border: none;">
+              <span class="badge badge-confidence" style="background: rgba(255,255,255,0.2); color: white;">İstanbul / Kadıköy</span>
+              <h2 style="font-size: 20px; font-weight: 800; margin-top: 6px; color: white;">Moda & Caferağa Bölgesi</h2>
+              <p style="font-size: 13px; color: #E0F2FE; margin-top: 4px;">
+                Genel Yaşam ve Güvenlik Göstergeleri Özeti
+              </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px;">
+              <div class="card">
+                <div style="font-size: 12px; color: var(--color-text-secondary);">Bölgesel Zemin</div>
+                <div style="font-size: 16px; font-weight: 800; color: var(--risk-low); margin-top: 4px;">Kayaç Zemin</div>
+                <div style="font-size: 10px; color: var(--color-text-muted);">Sıvılaşma: Çok Düşük</div>
+              </div>
+              <div class="card">
+                <div style="font-size: 12px; color: var(--color-text-secondary);">Toplu Ulaşım</div>
+                <div style="font-size: 16px; font-weight: 800; color: var(--color-accent); margin-top: 4px;">Çok Zengin</div>
+                <div style="font-size: 10px; color: var(--color-text-muted);">Vapur, Metro, Tramvay</div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 4px;">
+              <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">Bölge Bina Stoğu Dağılımı</h4>
+              <div style="display: flex; gap: 6px; height: 12px; border-radius: 6px; overflow: hidden; margin-bottom: 8px;">
+                <div style="width: 35%; background: #059669;" title="2018 Sonrası (%35)"></div>
+                <div style="width: 40%; background: #D97706;" title="2000-2018 (%40)"></div>
+                <div style="width: 25%; background: #E11D48;" title="1999 Öncesi (%25)"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--color-text-secondary);">
+                <span>🟢 Yeni Yapı (%35)</span>
+                <span>🟡 2000-2018 (%40)</span>
+                <span>🔴 Eski Yapı (%25)</span>
+              </div>
+            </div>
+
+            <button class="btn-primary" style="margin-top: 8px;" onclick="navigateTo('property-search')">
+              Bu Bölgede Bir Bina İncele →
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             09. KARŞILAŞTIRMA (/compare)
+             ================================================================== -->
+        <section id="screen-compare" class="screen">
+          <div class="screen-header">
+            <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+            <span class="screen-title">Evleri Karşılaştır</span>
+            <button class="header-action-btn" onclick="alert('PDF olarak indirildi.')">İndir</button>
+          </div>
+
+          <div style="padding: 16px;">
+            <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 12px;">
+              İki evi ortak göstergeler ve güven seviyeleriyle yan yana kıyaslayın.
+            </p>
+
+            <!-- Comparison Table Card -->
+            <div class="card" style="padding: 0; overflow: hidden;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; background: #F1F5F9; border-bottom: 1px solid var(--color-border); padding: 12px;">
+                <div>
+                  <span class="badge badge-confidence">Ev 1</span>
+                  <div style="font-weight: 800; font-size: 13px; margin-top: 4px;">Moda Cd. No: 42</div>
+                  <div style="font-size: 11px; color: var(--color-accent); font-weight: 700;">82/100 Skor</div>
+                </div>
+                <div>
+                  <span class="badge badge-confidence">Ev 2</span>
+                  <div style="font-weight: 800; font-size: 13px; margin-top: 4px;">Ihlamur Yolu No: 18</div>
+                  <div style="font-size: 11px; color: var(--risk-medium); font-weight: 700;">68/100 Skor</div>
+                </div>
+              </div>
+
+              <!-- Comparison Rows -->
+              <div style="padding: 12px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: 6px;">Bina Yaşı</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                  <span class="badge badge-low">2014 (12 Yıl)</span>
+                  <span class="badge badge-medium">1994 (32 Yıl)</span>
+                </div>
+
+                <div style="font-size: 11px; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: 6px;">Deprem & Zemin</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                  <span class="badge badge-low">Kayaç / Düşük Tehlike</span>
+                  <span class="badge badge-medium">Orta Zemin / ZD</span>
+                </div>
+
+                <div style="font-size: 11px; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: 6px;">Toplu Ulaşım</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                  <span class="badge badge-low">Metro: 8 Dk</span>
+                  <span class="badge badge-low">Otobüs: 3 Dk</span>
+                </div>
+
+                <div style="font-size: 11px; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: 6px;">Veri Güveni</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                  <span style="font-size: 12px; color: #0284C7; font-weight: 600;">●●● Yüksek</span>
+                  <span style="font-size: 12px; color: #D97706; font-weight: 600;">●●○ Orta (Tahmini)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout-box">
+              <strong>⚖️ Kıyaslama Özeti</strong>
+              Ev 1 (Moda), daha yeni yapı yönetmeliği ve zemin kalitesiyle önceliklerinize daha uygun görünmektedir.
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             10. KAYDEDİLENLER (/saved)
+             ================================================================== -->
+        <section id="screen-saved" class="screen">
+          <div class="screen-header">
+            <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+            <span class="screen-title">Kaydedilenler</span>
+            <span></span>
+          </div>
+
+          <div style="padding: 16px;">
+            <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+              <button class="choice-chip selected" style="flex: 1; justify-content: center;">Evler (2)</button>
+              <button class="choice-chip" style="flex: 1; justify-content: center;">Bölgeler (1)</button>
+            </div>
+
+            <div class="card card-clickable" onclick="navigateTo('property-report')">
+              <div style="display: flex; justify-content: space-between;">
+                <div>
+                  <span class="badge badge-confidence">Kadıköy / Caferağa</span>
+                  <h4 style="font-size: 14px; font-weight: 800; margin-top: 4px;">Moda Cd. No: 42</h4>
+                  <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 2px;">2014 Yapımı • 82 Uyum Skoru</p>
+                </div>
+                <button style="background: none; border: none; font-size: 16px; cursor: pointer;">❤️</button>
+              </div>
+            </div>
+
+            <div class="card card-clickable" onclick="navigateTo('property-report')">
+              <div style="display: flex; justify-content: space-between;">
+                <div>
+                  <span class="badge badge-confidence">Beşiktaş / Abbasağa</span>
+                  <h4 style="font-size: 14px; font-weight: 800; margin-top: 4px;">Ihlamur Yolu Sk. No: 18</h4>
+                  <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 2px;">1994 Yapımı • 68 Uyum Skoru</p>
+                </div>
+                <button style="background: none; border: none; font-size: 16px; cursor: pointer;">❤️</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             11. İNCELEME GEÇMİŞİ (/history)
+             ================================================================== -->
+        <section id="screen-history" class="screen">
+          <div class="screen-header">
+            <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+            <span class="screen-title">İnceleme Geçmişi</span>
+            <button class="header-action-btn" onclick="alert('Geçmiş temizlendi.')">Temizle</button>
+          </div>
+
+          <div style="padding: 16px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--color-text-muted); margin-bottom: 8px;">BUGÜN</div>
+            
+            <div class="card card-clickable" onclick="navigateTo('property-report')">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <h4 style="font-size: 14px; font-weight: 800;">Moda Cd. No: 42</h4>
+                  <div style="font-size: 11px; color: var(--color-text-muted);">Kadıköy • 14:20</div>
+                </div>
+                <span class="badge badge-low">82 Skor</span>
+              </div>
+            </div>
+
+            <div style="font-size: 12px; font-weight: 700; color: var(--color-text-muted); margin: 16px 0 8px;">DÜN</div>
+
+            <div class="card card-clickable" onclick="navigateTo('area-report')">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <h4 style="font-size: 14px; font-weight: 800;">Avcılar — Ambarlı Bölgesi</h4>
+                  <div style="font-size: 11px; color: var(--color-text-muted);">Bölge Raporu • 18:45</div>
+                </div>
+                <span class="badge badge-medium">İncelendi</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             12. PROFİL & ÖNCELİKLERİM (/profile)
+             ================================================================== -->
+        <section id="screen-profile" class="screen">
+          <div class="screen-header">
+            <span class="screen-title">Profil & Öncelikler</span>
+            <button class="header-action-btn" onclick="navigateTo('settings')">⚙️</button>
+          </div>
+
+          <div style="padding: 16px;">
+            <!-- User Card -->
+            <div class="card" style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+              <div style="width: 50px; height: 50px; border-radius: 50%; background: #0284C7; color: white; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800;">
+                DT
+              </div>
+              <div style="flex: 1;">
+                <h3 style="font-size: 16px; font-weight: 800;">Doğukan Taha Tıraş</h3>
+                <p style="font-size: 12px; color: var(--color-text-secondary);">dogukan@acktechs.com</p>
+              </div>
+            </div>
+
+            <!-- Priority Weights Editor -->
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h4 style="font-size: 15px; font-weight: 800;">Kişisel Önceliklerim</h4>
+                <button class="header-action-btn" onclick="navigateTo('survey')">Düzenle ✎</button>
+              </div>
+
+              <div class="data-row">
+                <span class="data-label">🛡️ Deprem & Zemin Önceliği:</span>
+                <span class="badge badge-low">%35 Ağırlık</span>
+              </div>
+              <div class="data-row">
+                <span class="data-label">🚇 Toplu Ulaşım Erişimi:</span>
+                <span class="badge badge-low">%25 Ağırlık</span>
+              </div>
+              <div class="data-row">
+                <span class="data-label">🏫 Okul & Çocuk Yaşamı:</span>
+                <span class="badge badge-medium">%20 Ağırlık</span>
+              </div>
+              <div class="data-row">
+                <span class="data-label">☀️ Güneş & İklim Konforu:</span>
+                <span class="badge badge-unknown">%20 Ağırlık</span>
+              </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="card" style="padding: 4px 14px;">
+              <div class="data-row" style="padding: 12px 0; cursor: pointer;" onclick="navigateTo('saved')">
+                <span class="data-val">❤️ Kaydedilen Raporlarım</span>
+                <span>➔</span>
+              </div>
+              <div class="data-row" style="padding: 12px 0; cursor: pointer;" onclick="navigateTo('history')">
+                <span class="data-val">🕒 İnceleme Geçmişim</span>
+                <span>➔</span>
+              </div>
+              <div class="data-row" style="padding: 12px 0; cursor: pointer;" onclick="navigateTo('help')">
+                <span class="data-val">📖 Yardım ve Metodoloji</span>
+                <span>➔</span>
+              </div>
+              <div class="data-row" style="padding: 12px 0; cursor: pointer;" onclick="navigateTo('settings')">
+                <span class="data-val">🔒 Gizlilik ve Ayarlar</span>
+                <span>➔</span>
+              </div>
+            </div>
+
+            <button class="btn-secondary" style="margin-top: 8px; color: var(--risk-high);" onclick="navigateTo('welcome')">
+              Çıkış Yap
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             13. AYARLAR & GİZLİLİK (/settings)
+             ================================================================== -->
+        <section id="screen-settings" class="screen">
+          <div class="screen-header">
+            <button class="header-back-btn" onclick="navigateTo('profile')">←</button>
+            <span class="screen-title">Ayarlar ve Gizlilik</span>
+            <span></span>
+          </div>
+
+          <div style="padding: 16px;">
+            <div class="card">
+              <h4 style="font-size: 14px; font-weight: 800; margin-bottom: 12px;">Gizlilik ve Veri Güvenliği</h4>
+              
+              <div class="data-row" style="padding: 10px 0;">
+                <span class="data-label">Hassas Konum Geçmişini Sakla</span>
+                <input type="checkbox" checked style="transform: scale(1.2);">
+              </div>
+              <div class="data-row" style="padding: 10px 0;">
+                <span class="data-label">Kişiselleştirilmiş Öneriler</span>
+                <input type="checkbox" checked style="transform: scale(1.2);">
+              </div>
+            </div>
+
+            <div class="card">
+              <h4 style="font-size: 14px; font-weight: 800; margin-bottom: 12px;">Bildirimler & Dil</h4>
+              
+              <div class="data-row" style="padding: 10px 0;">
+                <span class="data-label">Rapor Güncelleme Bildirimleri</span>
+                <input type="checkbox" checked style="transform: scale(1.2);">
+              </div>
+              <div class="data-row" style="padding: 10px 0;">
+                <span class="data-label">Uygulama Dili</span>
+                <span class="data-val">Türkçe (TR)</span>
+              </div>
+            </div>
+
+            <button class="btn-secondary" style="color: var(--risk-high); margin-top: 8px;" onclick="alert('Konum ve inceleme geçmişiniz silindi.')">
+              🗑️ Tüm Arama Geçmişimi Sil
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             14. YARDIM & METODOLOJİ (/help)
+             ================================================================== -->
+        <section id="screen-help" class="screen">
+          <div class="screen-header">
+            <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+            <span class="screen-title">Yardım & Metodoloji</span>
+            <span></span>
+          </div>
+
+          <div style="padding: 16px;">
+            <div class="card" style="background: #F0F9FF; border-color: #BAE6FD;">
+              <h4 style="font-size: 15px; font-weight: 800; color: #0369A1; margin-bottom: 6px;">Ev Karnesi Nasıl Çalışır?</h4>
+              <p style="font-size: 13px; color: #0C4A6E; line-height: 1.5;">
+                Ev Karnesi; AFAD, İBB, OpenStreetMap, Meteoroloji ve açık veri kaynaklarından elde edilen verileri matematiksel modellerle işleyerek anlaşılır ön göstergelere dönüştürür.
+              </p>
+            </div>
+
+            <div class="section-title">Sıkça Sorulan Sorular</div>
+
+            <div class="accordion-item open">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-title">Ev Karnesi kesin dayanıklılık raporu mudur?</div>
+                <span class="accordion-chevron">▼</span>
+              </div>
+              <div class="accordion-body">
+                Hayır. Ev Karnesi resmi bir inşaat mühendisliği ekspertizi değildir. Karar vermeden önce bilmeniz gereken verileri ve yerinde uzmana sormanız gereken noktaları listeler.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-title">Veri bulunamayan alanlar ne anlama gelir?</div>
+                <span class="accordion-chevron">▼</span>
+              </div>
+              <div class="accordion-body">
+                Veri yokluğu "düşük risk" anlamına gelmez. Verisi eksik olan göstergeler nötr renkle belirtilir ve yerinde kontrol önerilir.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-title">Hangi veri kaynakları kullanılıyor?</div>
+                <span class="accordion-chevron">▼</span>
+              </div>
+              <div class="accordion-body">
+                AFAD Türkiye Deprem Tehlike Haritası, İBB Mikrobölgeleme ve Zemin Raporları, İBB Açık Veri Portalı, OpenStreetMap ve uydu yükseklik modelleri kullanılmaktadır.
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div> <!-- /app-viewport -->
+
+      <!-- ==================================================================
+           FLOATING CAPSULE BOTTOM NAVIGATION (3-Pill)
+           ================================================================== -->
+      <nav class="floating-bottom-nav" id="bottomNav">
+        <!-- Home Item -->
+        <button class="nav-item active" id="nav-home" onclick="navigateTo('home')">
+          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          <span>Ana Sayfa</span>
+        </button>
+
+        <!-- Center Highlighted Search Button -->
+        <button class="nav-item search-btn" id="nav-search" onclick="navigateTo('property-search')">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </button>
+
+        <!-- Profile Item -->
+        <button class="nav-item" id="nav-profile" onclick="navigateTo('profile')">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <span>Profil</span>
+        </button>
+      </nav>
+
+    </div> <!-- /device-frame -->
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
