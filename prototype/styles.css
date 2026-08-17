@@ -294,23 +294,23 @@ body {
 }
 
 /* ==========================================================================
-   FLOATING CAPSULE BOTTOM NAVIGATION
+   FLOATING CAPSULE BOTTOM NAVIGATION (5-Pill Professional Standard)
    ========================================================================== */
 .floating-bottom-nav {
   position: absolute;
-  bottom: 20px;
-  left: 24px;
-  right: 24px;
+  bottom: 16px;
+  left: 14px;
+  right: 14px;
   height: 64px;
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(15, 23, 42, 0.94);
   backdrop-filter: blur(20px);
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: var(--shadow-floating);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 0 12px;
+  justify-content: space-between;
+  padding: 0 6px;
   z-index: 80;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
 }
@@ -334,40 +334,38 @@ body {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  transition: all 0.2s ease;
+  padding: 6px 4px;
+  flex: 1;
+  min-width: 0;
+  border-radius: 16px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-item span {
+  white-space: nowrap;
+  font-size: 10px;
+  letter-spacing: -0.2px;
+  transform: scale(0.95);
 }
 
 .nav-item svg {
   width: 20px;
   height: 20px;
   fill: currentColor;
+  transition: transform 0.2s ease;
 }
 
-.nav-item:hover, .nav-item.active {
-  color: #FFFFFF;
+.nav-item:hover {
+  color: #E2E8F0;
 }
 
 .nav-item.active {
-  background: rgba(255, 255, 255, 0.12);
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.12);
 }
 
-/* Center Highlighted Search Button */
-.nav-item.search-btn {
-  background: var(--color-accent);
-  color: white;
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  border-radius: 50%;
-  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.5);
-  margin-top: -6px;
-}
-
-.nav-item.search-btn svg {
-  width: 22px;
-  height: 22px;
+.nav-item.active svg {
+  transform: translateY(-1px);
 }
 
 .nav-item.search-btn:hover {

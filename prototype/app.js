@@ -47,9 +47,13 @@ function navigateTo(screenId) {
 
   if (screenId === 'home') {
     document.getElementById('nav-home')?.classList.add('active');
-  } else if (screenId === 'property-search' || screenId === 'area-search') {
+  } else if (screenId === 'property-search' || screenId === 'area-search' || screenId === 'property-report' || screenId === 'area-report') {
     document.getElementById('nav-search')?.classList.add('active');
-  } else if (screenId === 'profile' || screenId === 'settings') {
+  } else if (screenId === 'compare') {
+    document.getElementById('nav-compare')?.classList.add('active');
+  } else if (screenId === 'saved' || screenId === 'history') {
+    document.getElementById('nav-saved')?.classList.add('active');
+  } else if (screenId === 'profile' || screenId === 'settings' || screenId === 'help') {
     document.getElementById('nav-profile')?.classList.add('active');
   }
 }
