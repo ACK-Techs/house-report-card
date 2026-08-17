@@ -1,0 +1,15 @@
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Dependencies & Build artifacts
+node_modules/
+dist/
+build/
+.cache/
+
+# Local personal logs & private rules
+dogukan/
+.agents/rules/dogukan-log.md
