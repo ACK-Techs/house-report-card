@@ -19,6 +19,11 @@ function navigateTo(screenId) {
     targetScreen.scrollTop = 0;
   }
 
+  if (screenId === 'survey') {
+    currentSurveyStep = 1;
+    renderSurveyStep();
+  }
+
   // Üstteki kontrol select'ini senkronize et
   const selectEl = document.getElementById('screenSelect');
   if (selectEl && selectEl.value !== screenId) {
@@ -60,6 +65,88 @@ function toggleAccordion(header) {
 // Seçim Chip'leri Aç/Kapa
 function toggleChip(chip) {
   chip.classList.toggle('selected');
+}
+
+// Radyo tipi tekli seçim chip'i
+function toggleRadioChip(chip, parentSelector) {
+  const container = document.querySelector(parentSelector);
+  if (container) {
+    container.querySelectorAll('.choice-chip').forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+  }
+}
+
+// Kişiselleştirme Anketi (5 Adımlı Wizard) Yönetimi
+let currentSurveyStep = 1;
+const surveyStepCategories = {
+  1: "Hane ve Kullanım Amacı",
+  2: "Afet ve Zemin Duyarlılığı",
+  3: "Ulaşım ve Hareketlilik",
+  4: "Mahalle ve Yaşam Tarzı",
+  5: "İklim, Cephe & Bölge"
+};
+
+function renderSurveyStep() {
+  // Tüm adımları gizle, aktifi göster
+  for (let i = 1; i <= 5; i++) {
+    const stepEl = document.getElementById(`survey-step-${i}`);
+    if (stepEl) {
+      if (i === currentSurveyStep) {
+        stepEl.classList.add('active');
+      } else {
+        stepEl.classList.remove('active');
+      }
+    }
+  }
+
+  // Göstergeleri güncelle
+  const stepNumEl = document.getElementById('surveyStepNum');
+  const catEl = document.getElementById('surveyStepCategory');
+  const progressEl = document.getElementById('surveyProgressBar');
+  const prevBtn = document.getElementById('surveyPrevBtn');
+  const nextBtn = document.getElementById('surveyNextBtn');
+
+  if (stepNumEl) stepNumEl.innerText = `Adım ${currentSurveyStep} / 5`;
+  if (catEl) catEl.innerText = surveyStepCategories[currentSurveyStep] || '';
+  if (progressEl) progressEl.style.width = `${(currentSurveyStep / 5) * 100}%`;
+
+  // Buton durumları
+  if (prevBtn) {
+    prevBtn.style.display = currentSurveyStep > 1 ? 'block' : 'none';
+  }
+
+  if (nextBtn) {
+    if (currentSurveyStep === 5) {
+      nextBtn.innerText = 'Tercihleri Kaydet ve Başla ⚡';
+    } else {
+      nextBtn.innerText = 'İleri →';
+    }
+  }
+
+  // Sayfanın en üstüne kaydır
+  const surveyScreen = document.getElementById('screen-survey');
+  if (surveyScreen) surveyScreen.scrollTop = 0;
+}
+
+function nextSurveyStep() {
+  if (currentSurveyStep < 5) {
+    currentSurveyStep++;
+    renderSurveyStep();
+  } else {
+    // 5. Adım tamamlandı, ana sayfaya geç
+    currentSurveyStep = 1;
+    renderSurveyStep();
+    navigateTo('home');
+  }
+}
+
+function prevSurveyStep() {
+  if (currentSurveyStep > 1) {
+    currentSurveyStep--;
+    renderSurveyStep();
+  } else {
+    navigateTo('welcome');
+  }
 }
 
 // Giriş / Kayıt Sekmesi

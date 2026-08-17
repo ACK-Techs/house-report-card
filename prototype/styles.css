@@ -894,3 +894,20 @@ body {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* Survey Wizard Steps */
+.survey-step {
+  display: none;
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.survey-step.active {
+  display: block;
+}
+
+.survey-nav-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+

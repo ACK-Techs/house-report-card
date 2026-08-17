@@ -206,56 +206,199 @@
         </section>
 
         <!-- ==================================================================
-             02. KİŞİSELLEŞTİRME ANKETİ (/onboarding/survey)
+             02. KİŞİSELLEŞTİRME ANKETİ (/onboarding/survey) — 5 ADIMLI WIZARD
              ================================================================== -->
         <section id="screen-survey" class="screen no-nav">
           <div class="screen-header">
-            <button class="header-back-btn" onclick="navigateTo('welcome')">←</button>
+            <button class="header-back-btn" onclick="prevSurveyStep()">←</button>
             <span class="screen-title">Önceliklerini Belirle</span>
             <button class="header-action-btn" onclick="navigateTo('home')">Atla</button>
           </div>
 
-          <div style="padding: 20px;">
-            <!-- Progress Bar -->
+          <div style="padding: 20px 20px 30px;">
+            <!-- Dynamic Progress Indicator -->
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-              <span style="font-size: 12px; font-weight: 700; color: var(--color-accent);">Adım 1 / 5</span>
-              <span style="font-size: 12px; color: var(--color-text-secondary);">Hane ve Kullanım</span>
+              <span style="font-size: 12px; font-weight: 800; color: var(--color-accent);" id="surveyStepNum">Adım 1 / 5</span>
+              <span style="font-size: 12px; font-weight: 600; color: var(--color-text-secondary);" id="surveyStepCategory">Hane ve Kullanım Amacı</span>
             </div>
-            <div style="height: 6px; background: #E2E8F0; border-radius: 3px; margin-bottom: 20px; overflow: hidden;">
-              <div style="width: 25%; height: 100%; background: var(--color-accent); border-radius: 3px;"></div>
+            <div style="height: 6px; background: #E2E8F0; border-radius: 3px; margin-bottom: 18px; overflow: hidden;">
+              <div id="surveyProgressBar" style="width: 20%; height: 100%; background: var(--color-accent); border-radius: 3px; transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);"></div>
             </div>
 
-            <div class="card">
-              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">Bu evi kimin için araştırıyorsun?</h3>
-              <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 16px;">
-                Rapor sonuçlarındaki kategori ağırlıkları bu tercihlere göre şekillenecektir.
-              </p>
+            <!-- STEP 1: Hane ve Kullanım Amacı -->
+            <div id="survey-step-1" class="survey-step active">
+              <div class="card">
+                <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color: var(--color-text);">Bu evi kimin için araştırıyorsun?</h3>
+                <p style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 14px;">
+                  Raporlardaki öncelik ve uygunluk skorları bu profile göre ağırlıklandırılır.
+                </p>
 
-              <div class="chips-grid">
-                <div class="choice-chip selected" onclick="toggleChip(this)">👨‍👩‍👧‍👦 Çocuklu Aile</div>
-                <div class="choice-chip" onclick="toggleChip(this)">💼 Tek / Çift Yaşayan</div>
-                <div class="choice-chip" onclick="toggleChip(this)">🎓 Öğrenci</div>
-                <div class="choice-chip" onclick="toggleChip(this)">💻 Uzaktan Çalışan</div>
-                <div class="choice-chip" onclick="toggleChip(this)">👵 Yaşlı / Kısıtlı Birey</div>
-                <div class="choice-chip" onclick="toggleChip(this)">📈 Yatırım Amaçlı</div>
+                <div class="chips-grid">
+                  <div class="choice-chip selected" onclick="toggleChip(this)">👨‍👩‍👧‍👦 Çocuklu Aile</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">💼 Tek / Çift Yaşayan</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">🎓 Öğrenci</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">💻 Uzaktan Çalışan</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">👵 Yaşlı / Kısıtlı Birey</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">📈 Yatırım Amaçlı</div>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color: var(--color-text);">Konut kararınız nedir?</h3>
+                <p style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 14px;">
+                  İhtiyacınıza en uygun analiz derinliğini seçin.
+                </p>
+
+                <div class="chips-grid" style="margin-bottom: 0;">
+                  <div class="choice-chip selected" onclick="toggleChip(this)">🔑 Satın Almak İstiyorum</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">📋 Kiralamak İstiyorum</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">🔍 Karşılaştırıyorum / Kararsızım</div>
+                </div>
               </div>
             </div>
 
-            <div class="card">
-              <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">En önemli 2 önceliğin nedir?</h3>
-              <div class="chips-grid" style="margin-bottom: 0;">
-                <div class="choice-chip selected" onclick="toggleChip(this)">🛡️ Deprem ve Zemin Güveni</div>
-                <div class="choice-chip selected" onclick="toggleChip(this)">🚇 Metro ve Ulaşım Yakınlığı</div>
-                <div class="choice-chip" onclick="toggleChip(this)">🏫 Okul ve Kreş Erişimi</div>
-                <div class="choice-chip" onclick="toggleChip(this)">🌳 Park ve Yeşil Alanlar</div>
-                <div class="choice-chip" onclick="toggleChip(this)">☀️ Güneş ve İklim Konforu</div>
-                <div class="choice-chip" onclick="toggleChip(this)">🤫 Sessizlik ve Düşük Gürültü</div>
+            <!-- STEP 2: Afet, Deprem ve Zemin Duyarlılığı -->
+            <div id="survey-step-2" class="survey-step">
+              <div class="card">
+                <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color: var(--color-text);">Deprem ve zemin güvenliği yaklaşımınız:</h3>
+                <p style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 14px;">
+                  Güvenlik filtresi toleransınızı belirleyin.
+                </p>
+
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <div class="choice-chip selected" style="padding: 12px; justify-content: flex-start;" onclick="toggleRadioChip(this, '#survey-step-2')">
+                    <div style="font-size: 18px; margin-right: 8px;">🛡️</div>
+                    <div>
+                      <div style="font-size: 13px; font-weight: 700;">Maksimum Güvenlik Öncelikli</div>
+                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 1px;">Kaya/sağlam zemin, 2018 TDY sonrası yapı veya güçlendirilmiş bina</div>
+                    </div>
+                  </div>
+
+                  <div class="choice-chip" style="padding: 12px; justify-content: flex-start;" onclick="toggleRadioChip(this, '#survey-step-2')">
+                    <div style="font-size: 18px; margin-right: 8px;">⚖️</div>
+                    <div>
+                      <div style="font-size: 13px; font-weight: 700;">Dengeli Güvenlik ve Yaşam</div>
+                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 1px;">Genel güvenlik kriterleri ve sosyal yaşam/ulaşım dengesi</div>
+                    </div>
+                  </div>
+
+                  <div class="choice-chip" style="padding: 12px; justify-content: flex-start;" onclick="toggleRadioChip(this, '#survey-step-2')">
+                    <div style="font-size: 18px; margin-right: 8px;">🔍</div>
+                    <div>
+                      <div style="font-size: 13px; font-weight: 700;">Bilgi ve Şeffaflık Odaklı</div>
+                      <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 1px;">Riskleri şeffaf görmek yeterli, önceliklerim farklı</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color: var(--color-text);">İzlenmesini istediğiniz diğer afetler:</h3>
+                <div class="chips-grid" style="margin-bottom: 0;">
+                  <div class="choice-chip selected" onclick="toggleChip(this)">🌊 Sel ve Su Baskını</div>
+                  <div class="choice-chip selected" onclick="toggleChip(this)">⛰️ Dik Eğim / Heyelan Riski</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">🌲 Yangın Maruziyeti</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">💨 Kıyı Taşkını & Rüzgar</div>
+                </div>
               </div>
             </div>
 
-            <button class="btn-primary" style="margin-top: 16px;" onclick="navigateTo('home')">
-              Tercihleri Kaydet ve Başla →
-            </button>
+            <!-- STEP 3: Ulaşım ve Günlük Hareketlilik -->
+            <div id="survey-step-3" class="survey-step">
+              <div class="card">
+                <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color: var(--color-text);">Günlük hayatta en çok nasıl seyahat ediyorsunuz?</h3>
+                <p style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 14px;">
+                  Ulaşım skoru ve durak mesafesi ağırlığı buna göre ayarlanır.
+                </p>
+
+                <div class="chips-grid">
+                  <div class="choice-chip selected" onclick="toggleChip(this)">🚇 Metro, Metrobüs & Raylı Sistem</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">🚶 Yürüyerek & Bisiklet</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">🚗 Özel Araç (Otopark Öncelikli)</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">💻 Evden / Nadiren Dışarı Çıkan</div>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color: var(--color-text);">Toplu taşımaya maksimum yürüme süreniz:</h3>
+                <div class="chips-grid" style="margin-bottom: 0;">
+                  <div class="choice-chip selected" onclick="toggleChip(this)">⚡ En fazla 5-7 Dk (~400m)</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">🚶 10-15 Dk (~1 km)</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">⏱️ 20+ Dk (Fark etmez)</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 4: Mahalle, Çevre ve Yaşam Tarzı -->
+            <div id="survey-step-4" class="survey-step">
+              <div class="card">
+                <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color: var(--color-text);">Evinizin çevresinde zorunlu gördükleriniz:</h3>
+                <p style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 14px;">
+                  İstediğiniz kadar işaretleyebilirsiniz.
+                </p>
+
+                <div class="chips-grid">
+                  <div class="choice-chip selected" onclick="toggleChip(this)">🏫 Okul ve Kreş</div>
+                  <div class="choice-chip selected" onclick="toggleChip(this)">🌳 Park ve Yeşil Alanlar</div>
+                  <div class="choice-chip selected" onclick="toggleChip(this)">🏥 Hastane ve Eczane</div>
+                  <div class="choice-chip selected" onclick="toggleChip(this)">⚡ Acil Toplanma Alanı</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">🛒 Süpermarket & Pazar</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">☕ Kafe ve Sosyal Mekanlar</div>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color: var(--color-text);">Gürültü ve sokak ortamı beklentiniz:</h3>
+                <div class="chips-grid" style="margin-bottom: 0;">
+                  <div class="choice-chip selected" onclick="toggleChip(this)">🤫 Sakin ve Sessiz Ara Sokak</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">☕ Canlı ve Sosyal Mahalle</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">🏙️ Ana Caddeye Yakın</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 5: İklim, Cephe & Hedef Bölge -->
+            <div id="survey-step-5" class="survey-step">
+              <div class="card">
+                <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color: var(--color-text);">Güneş ve cephe tercihiniz:</h3>
+                <p style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 14px;">
+                  Işık ve iklim konforu değerlendirmesi için.
+                </p>
+
+                <div class="chips-grid">
+                  <div class="choice-chip selected" onclick="toggleChip(this)">☀️ Bol Güneş (Güney / Güneybatı)</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">⛅ Sabah Güneşi (Doğu)</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">❄️ Serin / Az Güneş (Kuzey)</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">🔄 Fark etmez</div>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color: var(--color-text);">Öncelikli ilgilendiğiniz bölge (İsteğe bağlı):</h3>
+                <div class="chips-grid" style="margin-bottom: 0;">
+                  <div class="choice-chip selected" onclick="toggleChip(this)">📍 Kadıköy / Caferağa / Moda</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">📍 Beşiktaş / Abbasağa / Levent</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">📍 Üsküdar / Çengelköy</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">📍 Bakırköy / Ataköy</div>
+                  <div class="choice-chip" onclick="toggleChip(this)">📍 Henüz Bölge Seçmedim</div>
+                </div>
+              </div>
+
+              <div class="callout-box" style="margin-top: 14px; background: #ECFDF5; border-color: #059669; color: #065F46;">
+                <strong>🎉 Tebrikler, Profiliniz Hazır!</strong>
+                Bu tercihler kaydedildiğinde Ev Karnesi tüm bina ve bölge incelemelerini sizin ihtiyaçlarınıza göre önceliklendirecektir.
+              </div>
+            </div>
+
+            <!-- Survey Navigation Footer -->
+            <div class="survey-nav-footer">
+              <button class="btn-secondary" id="surveyPrevBtn" onclick="prevSurveyStep()" style="display: none; flex: 1;">
+                ← Geri
+              </button>
+              <button class="btn-primary" id="surveyNextBtn" onclick="nextSurveyStep()" style="flex: 2;">
+                İleri →
+              </button>
+            </div>
           </div>
         </section>
 
