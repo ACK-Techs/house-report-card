@@ -162,6 +162,125 @@ function prevSurveyStep() {
   }
 }
 
+// Türkiye İl, İlçe ve Mahalle Hiyerarşi Veritabanı
+const turkeyLocationData = {
+  "İstanbul": {
+    "Kadıköy": ["Caferağa / Moda", "Caddebostan", "Fenerbahçe", "Suadiye", "Göztepe", "Koşuyolu", "Bostancı", "Acıbadem"],
+    "Beşiktaş": ["Abbasağa", "Bebek", "Etiler", "Levent", "Ortaköy", "Sinanpaşa", "Vişnezade"],
+    "Üsküdar": ["Çengelköy", "Kuzguncuk", "Beylerbeyi", "Kandilli", "Altunizade", "Acıbadem"],
+    "Şişli": ["Nişantaşı / Teşvikiye", "Mecidiyeköy", "Halaskargazi", "Fulya", "Esentepe"],
+    "Bakırköy": ["Ataköy (1-11. Kısım)", "Yeşilköy", "Florya / Şenlikköy", "Zuhuratbaba", "Kartaltepe"],
+    "Sarıyer": ["Yeniköy", "İstinye", "Tarabya", "Maslak", "Emirgan", "Büyükdere"],
+    "Avcılar": ["Ambarlı", "Denizköşkler", "Cihangir", "Merkez", "Gümüşpala"],
+    "Maltepe": ["İdealtepe", "Küçükyalı", "Altıntepe", "Cevizli", "Yalı"],
+    "Beyoğlu": ["Cihangir", "Galata", "Karaköy", "Gümüşsuyu", "Asmalımescit"],
+    "Fatih": ["Sultanahmet", "Aksaray", "Balat", "Fener", "Kocamustafapaşa"]
+  },
+  "Ankara": {
+    "Çankaya": ["Kızılay", "Tunalı Hilmi", "Bahçelievler", "Gaziosmanpaşa", "Çayyolu", "Ümitköy", "Bilkent"],
+    "Yenimahalle": ["Batıkent", "Demetevler", "Ostim", "Şentepe"],
+    "Keçiören": ["Etlik", "Aktepe", "Kalaba", "İncirli"],
+    "Etimesgut": ["Eryaman", "Bağlıca", "Elvankent"],
+    "Gölbaşı": ["İncek", "Mogan", "Bahçelievler"]
+  },
+  "İzmir": {
+    "Konak": ["Alsancak", "Göztepe", "Güzelyalı", "Kordon", "Hatay"],
+    "Karşıyaka": ["Bostanlı", "Mavişehir", "Alaybey", "Aksoy"],
+    "Bornova": ["Küçükpark", "Evka 3", "Kazımdirik", "Özkanlar"],
+    "Urla": ["İskele", "Çeşmealtı", "Gülbahçe"],
+    "Çeşme": ["Alaçatı", "Ilıca", "Dalyan", "Çiftlik"]
+  },
+  "Bursa": {
+    "Nilüfer": ["Özlüce", "Görükle", "Ataevler", "İhsaniye", "Balat"],
+    "Osmangazi": ["Çekirge", "Kükürtlü", "Heykel", "Demirtaş"],
+    "Mudanya": ["Güzelyalı", "Tirilye", "Siteler"]
+  },
+  "Antalya": {
+    "Muratpaşa": ["Lara", "Şirinyalı", "Kaleiçi", "Fener", "Meltem"],
+    "Konyaaltı": ["Liman", "Hurma", "Gürsu", "Toros"],
+    "Alanya": ["Kestel", "Mahmutlar", "Oba", "Merkez"]
+  }
+};
+
+function handleSurveyCityChange(cityName) {
+  const districtSelect = document.getElementById('surveyDistrictSelect');
+  const neighborhoodSelect = document.getElementById('surveyNeighborhoodSelect');
+  if (!districtSelect || !neighborhoodSelect) return;
+
+  districtSelect.innerHTML = '';
+  neighborhoodSelect.innerHTML = '';
+
+  const cityDistricts = turkeyLocationData[cityName];
+  if (cityDistricts) {
+    Object.keys(cityDistricts).forEach((district, index) => {
+      const opt = document.createElement('option');
+      opt.value = district;
+      opt.innerText = district;
+      if (index === 0) opt.selected = true;
+      districtSelect.appendChild(opt);
+    });
+
+    const firstDistrict = Object.keys(cityDistricts)[0];
+    handleSurveyDistrictChange(firstDistrict);
+  } else {
+    // Diğer 81 il için dinamik genel ilçe ve mahalleler
+    const defaultDistricts = ["Merkez", "1. Bölge / İlçe", "2. Bölge / İlçe", "Gelişme Alanı"];
+    defaultDistricts.forEach((d, idx) => {
+      const opt = document.createElement('option');
+      opt.value = d;
+      opt.innerText = d;
+      if (idx === 0) opt.selected = true;
+      districtSelect.appendChild(opt);
+    });
+
+    const defaultNeighborhoods = ["Merkez Mah.", "Cumhuriyet Mah.", "Yeni Mah.", "Atatürk Mah."];
+    defaultNeighborhoods.forEach((n, idx) => {
+      const opt = document.createElement('option');
+      opt.value = n;
+      opt.innerText = n;
+      if (idx === 0) opt.selected = true;
+      neighborhoodSelect.appendChild(opt);
+    });
+  }
+}
+
+function handleSurveyDistrictChange(districtName) {
+  const citySelect = document.getElementById('surveyCitySelect');
+  const neighborhoodSelect = document.getElementById('surveyNeighborhoodSelect');
+  if (!citySelect || !neighborhoodSelect) return;
+
+  const cityName = citySelect.value;
+  neighborhoodSelect.innerHTML = '';
+
+  const neighborhoods = turkeyLocationData[cityName]?.[districtName];
+  if (neighborhoods && neighborhoods.length > 0) {
+    neighborhoods.forEach((n, index) => {
+      const opt = document.createElement('option');
+      opt.value = n;
+      opt.innerText = n;
+      if (index === 0) opt.selected = true;
+      neighborhoodSelect.appendChild(opt);
+    });
+  } else {
+    const defaultNeighborhoods = ["Merkez Mah.", "Cumhuriyet Mah.", "Bahçelievler Mah.", "Gazi Mah."];
+    defaultNeighborhoods.forEach((n, idx) => {
+      const opt = document.createElement('option');
+      opt.value = n;
+      opt.innerText = n;
+      if (idx === 0) opt.selected = true;
+      neighborhoodSelect.appendChild(opt);
+    });
+  }
+}
+
+function resetSurveyLocation() {
+  const citySelect = document.getElementById('surveyCitySelect');
+  if (citySelect) {
+    citySelect.value = "İstanbul";
+    handleSurveyCityChange("İstanbul");
+  }
+}
+
 // Giriş / Kayıt Sekmesi
 function setAuthTab(mode) {
   const chips = document.querySelectorAll('#screen-welcome .choice-chip');
