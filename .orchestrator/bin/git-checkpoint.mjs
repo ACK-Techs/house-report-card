@@ -89,10 +89,10 @@ export function validateCommitMessage(message, label = 'commit') {
 
   const workItems = lines.filter((line) => /^Work-Item:\s+\S+/.test(line));
   const phaseLines = lines.filter((line) => /^Phase:\s+\S+/.test(line));
-  if (workItems.length !== 1) errors.push('exactly one Work-Item footer is required');
-  if (phaseLines.length !== 1) {
-    errors.push('exactly one Phase footer is required');
-  } else {
+  if (workItems.length > 1) errors.push('at most one Work-Item footer is allowed');
+  if (phaseLines.length > 1) {
+    errors.push('at most one Phase footer is allowed');
+  } else if (phaseLines.length === 1) {
     const phase = phaseLines[0].replace(/^Phase:\s+/, '').trim();
     if (!PHASES.has(phase)) errors.push(`unsupported Phase footer: ${phase}`);
   }

@@ -376,7 +376,7 @@ export async function renderPrompt(run, itemId, platform, repoRoot = REPO_ROOT) 
     `## Amaç\n\n${item.objective}\n\n## Sorumluluk sınırı\n\n${item.responsibility}\n\n## Girdiler\n\n${bullets(inputs)}\n\n` +
     `## Çıktılar\n\n${bullets(asArray(item.outputs))}\n\n## Kabul kriterleri\n\n${bullets(asArray(item.acceptanceCriteria))}\n\n` +
     `## Yazma kapsamı\n\n- Read-only: ${item.execution.readOnly}\n- Paths: ${asArray(item.execution.writeScopes).join(', ') || 'Yok'}\n\n` +
-    `## Proje kuralları\n\n${bullets(asArray(run.constraints))}\n- Kapsam dışı refactor yapma. Write item kontrolleri geçince yalnız atanmış scope'u docs/COMMIT_CONVENTION.md uyarınca atomik commit et; Work-Item ve Phase footer'larını ekle. Push yapma. Kritik belirsizlikte blocker sonucu üret.\n\n` +
+    `## Proje kuralları\n\n${bullets(asArray(run.constraints))}\n- Kapsam dışı refactor yapma. Write item kontrolleri geçince yalnız atanmış scope'u docs/COMMIT_CONVENTION.md uyarınca atomik commit et; izlenebilirlik için Work-Item ve Phase footer'larını eklemen önerilir (zorunlu değil). Push yapma. Kritik belirsizlikte blocker sonucu üret.\n\n` +
     `## ${adapter.displayName} notları\n\n${bullets(asArray(adapter.dispatchGuidance))}\n\n` +
     `## Teslim\n\nSonucu \`.orchestrator/contracts/result.schema.json\` biçiminde üret. Rolüne göre \`.orchestrator/roles/\` altındaki talimatı uygula. Implementasyon item'ları \`.orchestrator/roles/code-implementer.md\`, review ve verify item'ları bağımsız rol protokollerini kullanır.\n`;
 }

@@ -1,6 +1,6 @@
 # Ev Karnesi Ortak Commit ve Push Standardı
 
-Bu belge insan ve AI tüm katkıcılar için bağlayıcı Git dilidir. Amaç; farklı bilgisayarlarda üretilen değişikliklerin aynı biçimde okunması, work item ve faza kadar izlenmesi, atomik incelenmesi ve remote'a kontrollü sırayla gönderilmesidir.
+Bu belge insan ve AI tüm katkıcılar için bağlayıcı Git dilidir. Amaç; farklı bilgisayarlarda üretilen değişikliklerin aynı biçimde okunması, atomik incelenmesi ve remote'a kontrollü sırayla gönderilmesidir.
 
 ## 1. Tek commit biçimi
 
@@ -9,16 +9,20 @@ type(scope): imperative English summary
 
 Optional body explaining why and important constraints.
 
+Optional footers:
 Work-Item: <run-work-item-id>
 Phase: <phase-id>
 ```
+
+Zorunlu olan tek şey subject satırıdır: `type(scope): imperative English summary`.
 
 Kurallar:
 
 - `type` ve `scope` İngilizce, küçük harf ve ASCII olmalıdır.
 - Özet İngilizce, emir kipinde, küçük harfle başlamalı ve nokta ile bitmemelidir.
 - Subject en fazla 72 karakter olmalıdır.
-- Her görev commit'i `Work-Item` ve `Phase` footer'ı taşımalıdır.
+- `Work-Item` ve `Phase` footer'ları opsiyoneldir; yazılırsa her birinden en fazla bir tane bulunur ve `Phase` değeri geçerli faz listesinden seçilir.
+- Bir run graph içinde yürüyen iş için bu footer'ları eklemek izlenebilirlik açısından önerilir, fakat commit'in kabulü için şart değildir.
 - Body “ne değişti” listesini tekrar etmek yerine neden ve önemli davranış değişikliğini açıklar.
 - Commit tek bir mantıksal amacı kapsamalıdır.
 - Agent/model/bilgisayar adı subject veya scope olarak kullanılmaz.
@@ -73,7 +77,7 @@ Yeni scope gerekiyorsa kısa, teknoloji bağımsız ve tekrar kullanılabilir ol
 
 ## 4. Faz değerleri
 
-`Phase` footer'ında yalnız şu değerlerden biri kullanılır:
+`Phase` footer'ı opsiyoneldir. Kullanılırsa yalnız şu değerlerden biri yazılır:
 
 - `phase-0-discovery`
 - `phase-1-foundation`
@@ -87,6 +91,10 @@ Yeni scope gerekiyorsa kısa, teknoloji bağımsız ve tekrar kullanılabilir ol
 Repo bakım işi, en yakın ürün fazına bağlanamıyorsa `phase-1-foundation` altında yürütülür.
 
 ## 5. Doğru örnekler
+
+```text
+docs(discovery): define the Ev Karnesi product concept
+```
 
 ```text
 docs(discovery): define the Ev Karnesi product concept
@@ -129,7 +137,7 @@ feat(scoring): Added some things.
 - Testler başarısızken başarı commit'i oluşturmak
 - Review-only iş için boş commit üretmek
 - `fixup!` veya `squash!` commit'ini remote checkpoint'e taşımak
-- Work item/faz footer'ını atlamak
+- Aynı footer'ı (`Work-Item`, `Phase`) birden fazla kez yazmak veya geçersiz faz değeri kullanmak
 
 ## 7. Agent commit protokolü
 
@@ -145,7 +153,7 @@ Writer:
    node .orchestrator/bin/git-checkpoint.mjs validate-message <commit-message-file>
    ```
 
-6. Atomik commit oluşturur ve SHA'yı result'a kaydeder.
+6. Atomik commit oluşturur ve SHA'yı result'a kaydeder. Run graph içinde çalışıyorsa izlenebilirlik için `Work-Item` ve `Phase` footer'larını ekler.
 7. Kullanıcı açıkça push istemedikçe remote'a göndermez; istendiğinde `git push` kullanır.
 
 ## 8. Push protokolü

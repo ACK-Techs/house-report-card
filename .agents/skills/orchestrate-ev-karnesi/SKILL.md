@@ -78,7 +78,7 @@ node .orchestrator/bin/orchestrator.mjs render <run.json> <item-id> --platform c
 ## Git delivery
 
 - Follow `docs/COMMIT_CONVENTION.md` exactly.
-- Let a writer commit only its validated assigned scope with `Work-Item` and `Phase` footers.
+- Let a writer commit only its validated assigned scope; `Work-Item` and `Phase` footers are optional traceability aids.
 - Do not push unless the user asked; when they did, use `git push`.
 - Fetch before push; stop and report non-fast-forward or ownership conflicts rather than overwriting remote work.
 - Never force-push.

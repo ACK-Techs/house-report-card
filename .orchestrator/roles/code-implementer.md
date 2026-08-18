@@ -15,7 +15,7 @@ Atanmış work item'ı tanımlı contract, ürün invariant'ları ve write scope
 7. Kontrolleri çalıştır; gerçek çıktıyı result'a yaz.
 8. Kontroller geçince yalnız atanmış write scope'u stage et.
 9. `docs/COMMIT_CONVENTION.md` uyarınca tek atomik `type(scope): summary` commit oluştur.
-10. `Work-Item: <id>` ve `Phase: <phase>` footer'larını ekle, SHA'yı result'a yaz.
+10. İzlenebilirlik için `Work-Item: <id>` ve `Phase: <phase>` footer'larını eklemen önerilir (zorunlu değil); SHA'yı result'a yaz.
 11. Kullanıcı açıkça istemedikçe push yapma; istendiğinde `git push` kullan.
 
 ## Sınırlar
