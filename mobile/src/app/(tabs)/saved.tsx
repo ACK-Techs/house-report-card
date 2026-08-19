@@ -1,9 +1,8 @@
-import { Text, View } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
+import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-export default function SavedScreen() {
-  return (
-    <View>
-      <Text>Saved</Text>
-    </View>
-  );
+export default function HistoryScreen() {
+  return <SafeAreaView style={s.safe}><ScrollView contentContainerStyle={s.content}><Text style={s.eyebrow}>GEÇMİŞ</Text><Text style={s.title}>İnceleme geçmişi</Text><View style={s.empty}><Ionicons name="time-outline" size={38} color="#64748B" /><Text style={s.emptyTitle}>Henüz araştırma yok</Text><Text style={s.emptyText}>Tamamladığın ev ve bölge araştırmaları burada gösterilecek.</Text><Pressable accessibilityRole="button" accessibilityLabel="Ev veya bölge araştır" onPress={() => router.push('/(tabs)/map')} style={s.button}><Text style={s.buttonText}>Araştırmaya başla</Text></Pressable></View></ScrollView></SafeAreaView>;
 }
+const s = StyleSheet.create({ safe: { flex: 1, backgroundColor: '#F8FAFC' }, content: { flexGrow: 1, padding: 20, paddingBottom: 100 }, eyebrow: { color: '#0369A1', fontSize: 11, fontWeight: '800', letterSpacing: 1.2 }, title: { color: '#0F172A', fontSize: 27, fontWeight: '800', marginTop: 7 }, empty: { alignItems: 'center', backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#E2E8F0', borderRadius: 22, padding: 24, marginTop: 24 }, emptyTitle: { color: '#0F172A', fontSize: 17, fontWeight: '800', marginTop: 12, textAlign: 'center' }, emptyText: { color: '#475569', fontSize: 13, lineHeight: 20, textAlign: 'center', marginTop: 6 }, button: { minHeight: 48, justifyContent: 'center', paddingHorizontal: 20, borderRadius: 14, backgroundColor: '#0369A1', marginTop: 18 }, buttonText: { color: '#FFFFFF', fontWeight: '800' } });

@@ -6,7 +6,7 @@ export type RecentResearch = {
   contextLabel: 'Ev incelemesi' | 'Bölge araştırması';
   lastViewedLabel: string;
   statusLabel?: 'Rapor hazır' | 'İnceleme sürüyor' | 'Veri güncellendi' | 'Çevrimdışı';
-  target: string;
+  destination: { screen: 'search'; mode: ResearchMode };
 };
 
 export type RecentResearchState =
@@ -19,4 +19,8 @@ export type HomeViewModel = {
   userName: string | null;
   needsPreferences: boolean;
   recentResearch: RecentResearchState;
+};
+
+export type HomeDataSource = {
+  load(): Promise<HomeViewModel>;
 };
