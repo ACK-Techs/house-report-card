@@ -32,8 +32,8 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: 'Ana Sayfa',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name={focused ? "home" : "home-outline"} size={size} color={color} />
           ),
         }}
       />
@@ -41,9 +41,9 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="map"
         options={{
-          title: 'Harita',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="map" size={size} color={color} />
+          title: 'Arama',
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name={focused ? "search" : "search-outline"} size={size} color={color} />
           ),
         }}
       />
@@ -51,6 +51,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="compare"
         options={{
+          href: null,
           title: 'Karşılaştır',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="git-compare" size={size} color={color} />
@@ -61,6 +62,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="saved"
         options={{
+          href: null,
           title: 'Kayıtlar',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="bookmark" size={size} color={color} />
@@ -72,8 +74,8 @@ export default function TabsLayout() {
         name="profile"
         options={{
           title: 'Profil',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name={focused ? "person" : "person-outline"} size={size} color={color} />
           ),
         }}
       />
