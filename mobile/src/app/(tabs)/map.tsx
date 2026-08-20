@@ -1,1 +1,1 @@
-export { PropertySearchScreen as default } from '@/features/property-search/property-search-screen';
+export { PropertySearchScreen as default } from '../../features/property-search/property-search-screen';
