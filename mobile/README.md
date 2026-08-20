@@ -1,56 +1,115 @@
-# Welcome to your Expo app 👋
+# Ev Karnesi — Mobil Uygulama (React Native)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Claude Design'daki **"Ev Karnesi v2"** prototipinin React Native implementasyonu.
+Prototipteki 15 ekranın tamamı, ölçülebilir tasarım token'ları ve yeniden
+kullanılabilir bileşenler üzerinden yeniden yazılmıştır.
 
-## Get started
+## Teknoloji
 
-1. Install dependencies
+| Katman | Seçim |
+|---|---|
+| Çalışma zamanı | Expo SDK 54 · React Native 0.81 · React 19 |
+| Dil | TypeScript (`strict`, `noUncheckedIndexedAccess`) |
+| Navigasyon | React Navigation 7 (native-stack + bottom-tabs) |
+| Durum | Zustand |
+| Grafik | `react-native-svg` (skor halkası, radar, mahalle beşgenleri, sekme ikonları) |
+| Tipografi | Outfit + IBM Plex Sans + IBM Plex Mono (`@expo-google-fonts`) |
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Çalıştırma
 
 ```bash
-npm run reset-project
+npm install --prefix mobile
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+```bash
+npm start --prefix mobile
+```
 
-### Other setup steps
+Ardından Expo Go ile QR kodu okutun ya da `i` / `a` ile simülatör açın.
+Tarayıcıda hızlı önizleme için:
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```bash
+npm run web --prefix mobile
+```
 
-## Learn more
+Kalite kapıları:
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm run typecheck --prefix mobile && npm run lint --prefix mobile
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Dizin yapısı
 
-## Join the community
+```
+src/
+  theme/        Tasarım token'ları (renk, tipografi, ızgara, gölge)
+  types/        Alan modeli (Confidence, GeoResolution, ReportAxis, …)
+  data/         Prototipten çıkarılan içerik ve örnek veriler
+  store/        Zustand depoları (tercihler, toast)
+  components/
+    ui/         Bileşen kütüphanesi (Card, Chip, Accordion, SourceBadge, …)
+    charts/     SVG grafikler (ScoreRing, RadarChart, AreaGlyph)
+    map/        Şematik harita yüzeyleri
+  navigation/   Kök yığın + alt sekme navigasyonu
+  screens/      15 ekran
+```
 
-Join our community of developers creating universal apps.
+## Ekran envanteri
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+| # | Ekran | Dosya | Sekme çubuğu |
+|---|---|---|---|
+| 01 | Karşılama & giriş | `WelcomeScreen.tsx` | Gizli |
+| 01b | Kayıt | `RegisterScreen.tsx` | Gizli |
+| 02 | 5 adımlı anket | `SurveyScreen.tsx` | Gizli |
+| 03 | Ana sayfa | `HomeScreen.tsx` | Görünür |
+| 04 | Bina arama & harita | `SearchScreen.tsx` | Görünür |
+| 05 | Konum doğrulama | `ConfirmLocationScreen.tsx` | Modal sheet |
+| 06 | Bölge keşfi | `AreaScreen.tsx` | Gizli |
+| 07 | Bina karnesi | `PropertyReportScreen.tsx` | Gizli |
+| 08 | Bölge raporu | `AreaReportScreen.tsx` | Gizli |
+| 09 | Kıyaslama | `CompareScreen.tsx` | Görünür |
+| 10 | Kaydedilenler | `SavedScreen.tsx` | Görünür |
+| 11 | İnceleme geçmişi | `HistoryScreen.tsx` | Gizli |
+| 12 | Profil & öncelikler | `ProfileScreen.tsx` | Görünür |
+| 13 | Ayarlar & gizlilik | `SettingsScreen.tsx` | Gizli |
+| 14 | Yardım & metodoloji | `HelpScreen.tsx` | Gizli |
+
+## Ürün ilkelerinin arayüzdeki karşılığı
+
+Kök `AGENTS.md`'deki ürün değişmezleri kozmetik değil, bileşen sözleşmesidir:
+
+- **Risk ≠ veri güveni.** `ScoreBadge` risk/skor tonunu, `SourceBadge` güven
+  seviyesini gösterir; ikisi asla tek rozette birleşmez.
+- **Veri yokluğu düşük risk değildir.** `Confidence: 'none'` kesikli sınırlı,
+  nötr gri bir rozet üretir — yeşil hiçbir zaman kullanılmaz.
+- **Bina düzeyi ≠ bölge tahmini.** `ResolutionBadge` her eksenin coğrafi
+  çözünürlüğünü ayrı gösterir; bölge raporu hero alanında bunu açıkça yazar.
+- **Renk tek başına anlam taşımaz.** Her semantik renk bir metin etiketi veya
+  ikonla birlikte gelir; kıyaslama ekranında üstün metrik ayrıca `↑` alır.
+- **Sorumluluk reddi kalıcıdır.** Yasal metinler `data/content.ts` içindeki tek
+  `legal` nesnesinden gelir, ekranlarda kopyalanmaz.
+
+## Erişilebilirlik
+
+- Tüm dokunmatik hedefler en az 44×44pt (`minTouchTarget`, `hitSlopFor`).
+- Skorlar, sürgüler ve ilerleme çubukları `accessibilityValue` ile seslendirilir
+  (ör. *"Uyum skoru 82, 100 üzerinden"*).
+- Chip'ler seçim durumunu `radio`/`checkbox` rolüyle bildirir; akordeonlar
+  `expanded` durumunu taşır.
+- Toast mesajları `AccessibilityInfo.announceForAccessibility` ile duyurulur.
+
+## Veri katmanı
+
+Ekranlar `src/data/` altındaki tipli sabitleri okur. Gerçek API'ye geçerken
+yalnızca bu modüllerin yerini bir servis katmanı alır; ekranlar ve bileşenler
+değişmez. `src/types/index.ts` producer/consumer sözleşmesinin başlangıç
+noktasıdır.
+
+## Bilinen sınırlar
+
+- Harita şematiktir (prototipin kendisi gibi). Gerçek kartografi için
+  `react-native-maps` veya MapLibre entegrasyonu ayrı bir iştir.
+- Kimlik doğrulama, kalıcı depolama ve PDF/paylaşım eylemleri arayüz düzeyinde
+  temsil edilir; buton eylemleri toast üretir.
+- Tema seçimi (açık/koyu/sistem) ayarlarda tutulur ancak koyu tema paleti henüz
+  tanımlı değildir.
