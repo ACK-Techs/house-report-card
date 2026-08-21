@@ -6,14 +6,14 @@ kullanılabilir bileşenler üzerinden yeniden yazılmıştır.
 
 ## Teknoloji
 
-| Katman | Seçim |
-|---|---|
-| Çalışma zamanı | Expo SDK 54 · React Native 0.81 · React 19 |
-| Dil | TypeScript (`strict`, `noUncheckedIndexedAccess`) |
-| Navigasyon | React Navigation 7 (native-stack + bottom-tabs) |
-| Durum | Zustand |
-| Grafik | `react-native-svg` (skor halkası, radar, mahalle beşgenleri, sekme ikonları) |
-| Tipografi | Outfit + IBM Plex Sans + IBM Plex Mono (`@expo-google-fonts`) |
+| Katman         | Seçim                                                                        |
+| -------------- | ---------------------------------------------------------------------------- |
+| Çalışma zamanı | Expo SDK 54 · React Native 0.81 · React 19                                   |
+| Dil            | TypeScript (`strict`, `noUncheckedIndexedAccess`)                            |
+| Navigasyon     | React Navigation 7 (native-stack + bottom-tabs)                              |
+| Durum          | Zustand                                                                      |
+| Grafik         | `react-native-svg` (skor halkası, radar, mahalle beşgenleri, sekme ikonları) |
+| Tipografi      | Outfit + IBM Plex Sans + IBM Plex Mono (`@expo-google-fonts`)                |
 
 ## Çalıştırma
 
@@ -56,23 +56,23 @@ src/
 
 ## Ekran envanteri
 
-| # | Ekran | Dosya | Sekme çubuğu |
-|---|---|---|---|
-| 01 | Karşılama & giriş | `WelcomeScreen.tsx` | Gizli |
-| 01b | Kayıt | `RegisterScreen.tsx` | Gizli |
-| 02 | 5 adımlı anket | `SurveyScreen.tsx` | Gizli |
-| 03 | Ana sayfa | `HomeScreen.tsx` | Görünür |
-| 04 | Bina arama & harita | `SearchScreen.tsx` | Görünür |
-| 05 | Konum doğrulama | `ConfirmLocationScreen.tsx` | Modal sheet |
-| 06 | Bölge keşfi | `AreaScreen.tsx` | Gizli |
-| 07 | Bina karnesi | `PropertyReportScreen.tsx` | Gizli |
-| 08 | Bölge raporu | `AreaReportScreen.tsx` | Gizli |
-| 09 | Kıyaslama | `CompareScreen.tsx` | Görünür |
-| 10 | Kaydedilenler | `SavedScreen.tsx` | Görünür |
-| 11 | İnceleme geçmişi | `HistoryScreen.tsx` | Gizli |
-| 12 | Profil & öncelikler | `ProfileScreen.tsx` | Görünür |
-| 13 | Ayarlar & gizlilik | `SettingsScreen.tsx` | Gizli |
-| 14 | Yardım & metodoloji | `HelpScreen.tsx` | Gizli |
+| #   | Ekran               | Dosya                       | Sekme çubuğu |
+| --- | ------------------- | --------------------------- | ------------ |
+| 01  | Karşılama & giriş   | `WelcomeScreen.tsx`         | Gizli        |
+| 01b | Kayıt               | `RegisterScreen.tsx`        | Gizli        |
+| 02  | 5 adımlı anket      | `SurveyScreen.tsx`          | Gizli        |
+| 03  | Ana sayfa           | `HomeScreen.tsx`            | Görünür      |
+| 04  | Bina arama & harita | `SearchScreen.tsx`          | Görünür      |
+| 05  | Konum doğrulama     | `ConfirmLocationScreen.tsx` | Modal sheet  |
+| 06  | Bölge keşfi         | `AreaScreen.tsx`            | Gizli        |
+| 07  | Bina karnesi        | `PropertyReportScreen.tsx`  | Gizli        |
+| 08  | Bölge raporu        | `AreaReportScreen.tsx`      | Gizli        |
+| 09  | Kıyaslama           | `CompareScreen.tsx`         | Görünür      |
+| 10  | Kaydedilenler       | `SavedScreen.tsx`           | Görünür      |
+| 11  | İnceleme geçmişi    | `HistoryScreen.tsx`         | Gizli        |
+| 12  | Profil & öncelikler | `ProfileScreen.tsx`         | Görünür      |
+| 13  | Ayarlar & gizlilik  | `SettingsScreen.tsx`        | Gizli        |
+| 14  | Yardım & metodoloji | `HelpScreen.tsx`            | Gizli        |
 
 ## Ürün ilkelerinin arayüzdeki karşılığı
 
@@ -93,7 +93,7 @@ Kök `AGENTS.md`'deki ürün değişmezleri kozmetik değil, bileşen sözleşme
 
 - Tüm dokunmatik hedefler en az 44×44pt (`minTouchTarget`, `hitSlopFor`).
 - Skorlar, sürgüler ve ilerleme çubukları `accessibilityValue` ile seslendirilir
-  (ör. *"Uyum skoru 82, 100 üzerinden"*).
+  (ör. _"Uyum skoru 82, 100 üzerinden"_).
 - Chip'ler seçim durumunu `radio`/`checkbox` rolüyle bildirir; akordeonlar
   `expanded` durumunu taşır.
 - Toast mesajları `AccessibilityInfo.announceForAccessibility` ile duyurulur.
@@ -109,7 +109,9 @@ noktasıdır.
 
 - Harita şematiktir (prototipin kendisi gibi). Gerçek kartografi için
   `react-native-maps` veya MapLibre entegrasyonu ayrı bir iştir.
-- Kimlik doğrulama, kalıcı depolama ve PDF/paylaşım eylemleri arayüz düzeyinde
-  temsil edilir; buton eylemleri toast üretir.
+- Profil ve tercih state'i AsyncStorage ile cihazda kalıcı tutulur. Kimlik
+  doğrulama, backend senkronizasyonu, kaydedilenler/geçmiş veri katmanı ve
+  PDF/paylaşım eylemleri hâlâ arayüz düzeyindedir; ilgili butonlar bazı
+  akışlarda toast üretir.
 - Tema seçimi (açık/koyu/sistem) ayarlarda tutulur ancak koyu tema paleti henüz
   tanımlı değildir.

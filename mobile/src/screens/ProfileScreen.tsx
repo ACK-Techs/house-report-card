@@ -4,6 +4,7 @@ import type {
   NativeStackNavigationProp,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import {
@@ -15,10 +16,11 @@ import {
   Screen,
   ScreenHeader,
   SliderRow,
+  TextField,
 } from '@/components/ui';
-import { demoUser } from '@/data/content';
 import type { MainTabParamList, RootStackParamList } from '@/navigation/types';
 import { selectWeightTotal, usePreferencesStore, type WeightKey } from '@/store/usePreferencesStore';
+import { useToast } from '@/store/useToastStore';
 import { colors, spacing } from '@/theme';
 
 type Props = CompositeScreenProps<
@@ -35,9 +37,29 @@ const WEIGHT_LABELS: { key: WeightKey; label: string }[] = [
 
 /** 12 — Profil ve öncelik çarkı. */
 export function ProfileScreen({ navigation }: Props) {
+  const toast = useToast();
+  const profile = usePreferencesStore((state) => state.profile);
+  const updateProfile = usePreferencesStore((state) => state.updateProfile);
   const weights = usePreferencesStore((state) => state.weights);
   const setWeight = usePreferencesStore((state) => state.setWeight);
   const total = usePreferencesStore(selectWeightTotal);
+  const [fullName, setFullName] = useState(profile.fullName);
+
+  useEffect(() => {
+    setFullName(profile.fullName);
+  }, [profile.fullName]);
+
+  const saveProfile = () => {
+    const normalizedName = fullName.trim().replace(/\s+/g, ' ');
+    if (normalizedName.length < 2) {
+      toast('Ad soyad en az 2 karakter olmalı');
+      return;
+    }
+
+    updateProfile({ fullName: normalizedName });
+    setFullName(normalizedName);
+    toast('Profil bilgileriniz kaydedildi');
+  };
 
   return (
     <Screen
@@ -55,18 +77,48 @@ export function ProfileScreen({ navigation }: Props) {
       <Card elevation="flat" style={styles.identityCard}>
         <View style={styles.avatar}>
           <AppText variant="cardTitle" color={colors.white} style={styles.avatarText}>
-            {demoUser.initials}
+            {profile.fullName
+              .split(' ')
+              .filter(Boolean)
+              .slice(0, 2)
+              .map((part) => part[0])
+              .join('')
+              .toUpperCase()}
           </AppText>
         </View>
         <View style={styles.identityText}>
           <AppText variant="cardTitle" style={styles.name}>
-            {demoUser.fullName}
+            {profile.fullName}
           </AppText>
           <AppText variant="caption" color={colors.textMuted} style={styles.email}>
-            {demoUser.email}
+            {profile.email}
           </AppText>
-          <Badge label={demoUser.badge} tone="positive" />
+          <Badge label="Öncelik profili aktif" tone="positive" />
         </View>
+      </Card>
+
+      <Card elevation="flat" style={styles.card}>
+        <AppText variant="section" style={styles.profileTitle}>
+          Profil bilgileri
+        </AppText>
+        <TextField
+          label="Ad soyad"
+          value={fullName}
+          onChangeText={setFullName}
+          autoCapitalize="words"
+          autoCorrect={false}
+          maxLength={80}
+          returnKeyType="done"
+          containerStyle={styles.nameField}
+        />
+        <TextField
+          label="E-posta"
+          value={profile.email}
+          editable={false}
+          accessibilityHint="E-posta değişikliği hesap ayarlarından yapılır"
+          containerStyle={styles.nameField}
+        />
+        <Button label="Profil bilgilerini kaydet" size="sm" onPress={saveProfile} />
       </Card>
 
       <Card elevation="flat" style={styles.card}>
@@ -143,6 +195,8 @@ const styles = StyleSheet.create({
   name: { fontSize: 16 },
   email: { marginTop: 2, marginBottom: spacing.xs },
   card: { marginBottom: spacing.lg },
+  profileTitle: { marginBottom: spacing.lg },
+  nameField: { marginBottom: spacing.lg },
   weightHeader: {
     flexDirection: 'row',
     alignItems: 'baseline',
